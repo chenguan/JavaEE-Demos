@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>yew1eb's blog</title><link>yew1eb.github.io/</link><description></description><atom:link href="yew1eb.github.io/feed.xml" rel="self"></atom:link><lastBuildDate>Tue, 24 Feb 2015 16:33:00 +0800</lastBuildDate><item><title>Pelican-Blog文章格式和Markdown基本语法</title><link>yew1eb.github.io/2015/02/first-article.html</link><description>&lt;h2&gt;pelican-blog文章的基本格式&lt;/h2&gt;
+&lt;hr /&gt;
+&lt;p&gt;Title: 标题&lt;br /&gt;
+Date: 日期&lt;br /&gt;
+Category: 分类&lt;br /&gt;
+Tags: 标签&lt;br /&gt;
+Slug: 生成的url&lt;br /&gt;
+Summary: 描述部分&lt;br /&gt;
+正文部分。。。 &lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;Markdown基本语法&lt;/h2&gt;
+&lt;p&gt;&amp;emsp;&amp;emsp;Markdown是一个将文本转化为HTML的工具。简单来说，Markdown是一个兼顾可读性与易用性的轻量级标记体系。Markdown并不追求大而全，它只关心HTML里最常用的几个标记，对于一些不常用的标记它允许直接将HTML标记插入文本。  &lt;/p&gt;
+&lt;h3&gt;&lt;strong&gt;基本符号&lt;/strong&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;*,-,+ 这3个符号效果都一样&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h3&gt;&lt;strong&gt;换行&lt;/strong&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;空白行表示另起一个段落&lt;/li&gt;
+&lt;li&gt;在文末加上连续两个空格,表示换行&lt;/li&gt;
+&lt;li&gt;连续3个符号，然后回车，表示 hr水平分隔线&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h3&gt;&lt;strong&gt;标题&lt;/strong&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;连续#的个数对应h1~h6&lt;/li&gt;
+&lt;li&gt;在文字左右各加两个符号，表示加粗&lt;/li&gt;
+&lt;li&gt;在文字左右各加一个符号，表示斜体&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h3&gt;&lt;strong&gt;引用&lt;/strong&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;行首使用&amp;gt;加上一个空格表示引用段落，可以嵌套使用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h3&gt;&lt;strong&gt;列表&lt;/strong&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;无序列表使用*、+或-后面加上空格来表示&lt;/li&gt;
+&lt;li&gt;有序列表使用数字加英文句号加空格表示&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h3&gt;&lt;strong&gt;代码区域&lt;/strong&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;行内代码使用反斜杠`表示&lt;/li&gt;
+&lt;li&gt;代码段落则是在每行文字前加4个空格或者1个缩进符表示&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h3&gt;&lt;strong&gt;链接&lt;/strong&gt;&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;+ 直接写: [链接文本](url &amp;quot;可选的标题&amp;quot;)
++ 引用: [链接文本][id] ，[id]: url &amp;quot;可选的标题&amp;quot;， 定义部分可以出现在文本中的其他位置，ref一般用数字表示。
++ 简写: url: &amp;lt;url&amp;gt; 链接文本即url
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;hr /&gt;
+&lt;h3&gt;&lt;strong&gt;图片&lt;/strong&gt;&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;+ 直接写: ![alt_text](url &amp;quot;可选的title&amp;quot;)
++ 引用: ![alt_text][id],预先定义 [id]:url &amp;quot;可选title&amp;quot;
++ 直接使用&amp;lt;img&amp;gt;标签，这样可以指定图片的大小尺寸
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;hr /&gt;
+&lt;h3&gt;&lt;strong&gt;转义字符&lt;/strong&gt;&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;+ \\ 反斜杠  
++ \` 反引号  
++ \* 星号  
++ \_ 下划线  
++ \{\} 大括号  
++ \[\] 中括号  
++ \(\) 小括号  
++ \# 井号  
++ \+ 加号  
++ \- 减号  
++ \. 英文句号  
++ \! 感叹号
+&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">yew1eb</dc:creator><pubDate>Tue, 24 Feb 2015 16:33:00 +0800</pubDate><guid>tag:,2015-02-24:yew1eb.github.io/2015/02/first-article.html</guid><category>pelican</category><category>Markdown</category></item></channel></rss>

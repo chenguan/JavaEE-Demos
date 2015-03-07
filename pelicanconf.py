@@ -5,7 +5,7 @@ from __future__ import unicode_literals
 AUTHOR = u'yew1eb'
 SITENAME = u"yew1eb's blog"
 
-SITEURL = ''
+SITEURL = 'yew1eb.github.io'
 
 # 时间日期设置
 TIMEZONE = 'Asia/Shanghai'
@@ -90,6 +90,7 @@ TRANSLATION_FEED_ATOM = None
 
 # 友情链接
 LINKS =  (
+        ('我的csdn博客','http://blog.csdn.net/yew1eb/'),
         ('Pelican', 'http://getpelican.com/'),
         ('Python.org', 'http://python.org/'),
         ('Jinja2', 'http://jinja.pocoo.org/'),
@@ -97,8 +98,8 @@ LINKS =  (
          )
 
 # Social widget
-SOCIAL = (('Github', 'https://github.com/yew1eb'),
-		  ('Weibo', 'http://weibo.com/yew1eb'),)
+#SOCIAL = (('Github', 'https://github.com/yew1eb'),
+#		  ('Weibo', 'http://weibo.com/yew1eb'),)
 
 # JiaThis 分享图标
 JIATHIS_PROFILE = True 		  
@@ -113,7 +114,7 @@ BOOTSTRAP_THEME = 'spacelab'
 PYGMENTS_STYLE = 'monokai'
 
 # 导航栏目
-MENUITEMS = ()#(('baidu', 'http://www.baidu.com'), )
+MENUITEMS =() #(('首页', '#'), )
 DISPLAY_PAGES_ON_MENU = True #显示 pages页面
 DISPLAY_CATEGORIES_ON_MENU = False
 
@@ -121,6 +122,7 @@ DISPLAY_CATEGORIES_ON_MENU = False
 ## breadcrumbs 部分
 DISPLAY_BREADCRUMBS = False
 DISPLAY_CATEGORY_IN_BREADCRUMBS = False
+DISPLAY_ARTICLE_INFO_ON_INDEX = True  #显示 article_info
 PDF_PROCESSOR = False # 生成pdf格式的文章
 DISPLAY_NEIGHBORS = True #显示上一篇和下一篇文章链接
 

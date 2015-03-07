@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:og="http://ogp.me/ns#"
+      xmlns:fb="https://www.facebook.com/2008/fbml">
+<head>
+    <title>Pelican-Blog文章格式和Markdown基本语法 - yew1eb's blog</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+	
+    <!-- Open Graph tags -->
+            <meta property="og:type" content="article"/>
+            <meta property="og:title" content="Pelican-Blog文章格式和Markdown基本语法"/>
+            <meta property="og:url" content="../../2015/02/first-article.html"/>
+            <meta property="og:description" content="pelican-blog文章的基本格式和Markdown基本语法笔记"/>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="../../theme/css/bootstrap.yeti.min.css" type="text/css"/>
+    <link href="../../theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="../../theme/css/style.css" type="text/css"/>
+
+        <link href="../../feed.xml" type="application/atom+xml" rel="alternate"
+              title="yew1eb's blog RSS Feed"/>
+
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="../../" class="navbar-brand">
+yew1eb's blog            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+ 
+                         <li><a href="../../about.html">
+                             关于
+                          </a></li>
+                         <li><a href="../../resume.html">
+                             个人简历
+                          </a></li>
+				
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="../../archives.html"><i class="fa fa-th-list"></i><span class="icon-label">归档</span></a></li>
+                <li><a href="https://github.com/yew1eb"><i class="fa fa-github fa-lg"></i></a></li>
+                <li><a href="http://weibo.com/yew1eb"><i class="fa fa-weibo fa-lg"></i></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="../../2015/02/first-article.html"
+                       rel="bookmark"
+                       title="Permalink to Pelican-Blog文章格式和Markdown基本语法">
+                        Pelican-Blog文章格式和Markdown基本语法
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published article_info">
+        <i class="fa fa-calendar"></i><time datetime="2015-02-24T16:33:00+08:00"> 2015-02-24 16:33:00</time>
+    </span>
+        <span class="label label-default">By</span>
+        <span class="published article_info">
+            <i class="fa fa-user"></i> yew1eb
+        </span>
+
+    <span class="label label-default">Category</span>
+    <span class="published article_info">
+        <a href="../../category/ri-chang.html">日常</a>
+    </span>
+
+	
+<span class="label label-default">Tags</span>
+	<a href="../../tag/pelican.html">pelican</a>
+        /
+	<a href="../../tag/markdown.html">Markdown</a>
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <h2>pelican-blog文章的基本格式</h2>
+<hr />
+<p>Title: 标题<br />
+Date: 日期<br />
+Category: 分类<br />
+Tags: 标签<br />
+Slug: 生成的url<br />
+Summary: 描述部分<br />
+正文部分。。。 </p>
+<hr />
+<h2>Markdown基本语法</h2>
+<p>&emsp;&emsp;Markdown是一个将文本转化为HTML的工具。简单来说，Markdown是一个兼顾可读性与易用性的轻量级标记体系。Markdown并不追求大而全，它只关心HTML里最常用的几个标记，对于一些不常用的标记它允许直接将HTML标记插入文本。  </p>
+<h3><strong>基本符号</strong></h3>
+<ul>
+<li>*,-,+ 这3个符号效果都一样</li>
+</ul>
+<hr />
+<h3><strong>换行</strong></h3>
+<ul>
+<li>空白行表示另起一个段落</li>
+<li>在文末加上连续两个空格,表示换行</li>
+<li>连续3个符号，然后回车，表示 hr水平分隔线</li>
+</ul>
+<hr />
+<h3><strong>标题</strong></h3>
+<ul>
+<li>连续#的个数对应h1~h6</li>
+<li>在文字左右各加两个符号，表示加粗</li>
+<li>在文字左右各加一个符号，表示斜体</li>
+</ul>
+<hr />
+<h3><strong>引用</strong></h3>
+<ul>
+<li>行首使用&gt;加上一个空格表示引用段落，可以嵌套使用</li>
+</ul>
+<hr />
+<h3><strong>列表</strong></h3>
+<ul>
+<li>无序列表使用*、+或-后面加上空格来表示</li>
+<li>有序列表使用数字加英文句号加空格表示</li>
+</ul>
+<hr />
+<h3><strong>代码区域</strong></h3>
+<ul>
+<li>行内代码使用反斜杠`表示</li>
+<li>代码段落则是在每行文字前加4个空格或者1个缩进符表示</li>
+</ul>
+<hr />
+<h3><strong>链接</strong></h3>
+<div class="highlight"><pre>+ 直接写: [链接文本](url &quot;可选的标题&quot;)
++ 引用: [链接文本][id] ，[id]: url &quot;可选的标题&quot;， 定义部分可以出现在文本中的其他位置，ref一般用数字表示。
++ 简写: url: &lt;url&gt; 链接文本即url
+</pre></div>
+
+
+<hr />
+<h3><strong>图片</strong></h3>
+<div class="highlight"><pre>+ 直接写: ![alt_text](url &quot;可选的title&quot;)
++ 引用: ![alt_text][id],预先定义 [id]:url &quot;可选title&quot;
++ 直接使用&lt;img&gt;标签，这样可以指定图片的大小尺寸
+</pre></div>
+
+
+<hr />
+<h3><strong>转义字符</strong></h3>
+<div class="highlight"><pre>+ \\ 反斜杠  
++ \` 反引号  
++ \* 星号  
++ \_ 下划线  
++ \{\} 大括号  
++ \[\] 中括号  
++ \(\) 小括号  
++ \# 井号  
++ \+ 加号  
++ \- 减号  
++ \. 英文句号  
++ \! 感叹号
+</pre></div>
+            </div>
+            <br />
+    <!-- JiaThis Button BEGIN -->
+    <div class="jiathis_style">
+    <span class="jiathis_txt">分享到：</span>
+    <a class="jiathis_button_qzone">QQ空间</a>
+    <a class="jiathis_button_tsina">新浪微薄</a>
+    <a class="jiathis_button_tqq">腾讯微薄</a>
+    <a class="jiathis_button_renren">人人网</a>
+    <a class="jiathis_button_kaixin001">开心网</a>
+
+    <a href="http://www.jiathis.com/share?uid=1904070" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+    <a class="jiathis_counter_style"></a>
+    </div>
+    <script type="text/javascript" >
+    var jiathis_config={
+        data_track_clickback:true,
+        summary:"",
+        shortUrl:false,
+        hideMore:false
+    }
+    </script>
+    <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1904070" charset="utf-8"></script>
+    <!-- JiaThis Button END -->
+
+    <div>
+        <br />
+        <hr />
+        <ul>
+        </ul>
+    </div>
+			
+			
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="first-article" 
+	data-title="Pelican-Blog文章格式和Markdown基本语法" data-url="../../2015/02/first-article.html"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"yew1eb"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+
+
+        </article>
+    </section>
+
+        </div>
+	
+        <div class="col-sm-3 well well-sm" id="sidebar">
+
+<aside>
+    <section>
+        <ul class="list-group list-group-flush">
+                <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">最新日志</span></h4>
+                    <ul class="list-group" id="recentposts">
+                        <li class="list-group-item">
+                            <a href="../../2015/02/first-article.html">
+                                Pelican-Blog文章格式和Markdown基本语法
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="list-group-item"><a href="../../category/index.html"><h4><i class="fa fa-coffee fa-lg"></i><span class="icon-label">日志分类</span></h4></a>
+                    <ul class="list-group" id="categories">
+                        <li class="list-group-item">
+                            <a href="../../category/ri-chang.html">
+                                <i class="fa fa-folder-open fa-lg"></i> 日常
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="list-group-item"><a href="../../tag/index.html"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">标签云</span></h4></a>
+                    <ul class="list-group" id="tags">
+                        <span class="list-group-item tag-4">
+                            <a href="../../tag/markdown.html">
+                                Markdown
+                            </a>
+                        </span>
+                        <span class="list-group-item tag-4">
+                            <a href="../../tag/pelican.html">
+                                pelican
+                            </a>
+                        </span>
+                    </ul>
+                </li>
+
+
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">友情链接</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="http://blog.csdn.net/yew1eb/" target="_blank">
+                我的csdn博客
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://getpelican.com/" target="_blank">
+                Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://python.org/" target="_blank">
+                Python.org
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://jinja.pocoo.org/" target="_blank">
+                Jinja2
+            </a>
+        </li>
+      </ul>
+    </li>
+
+        </ul>
+    </section>
+
+</aside>        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2015 yew1eb
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>
+			.&nbsp
+			<script src="http://s9.cnzz.com/stat.php?id=1254417815&web_id=1254417815&show=pic" language="JavaScript"></script>
+         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="../../theme/js/jquery.min.js"></script>
+<script src="../../theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="../../theme/js/respond.min.js"></script>
+
+<!-- For the Tags Cloud -->
+<script type="text/javascript">
+</script>
+
+
+
+</body>
+</html>

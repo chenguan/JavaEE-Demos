@@ -14,15 +14,16 @@
                         {% include "includes/article_info.html" %}
                     </div>
                 {% endif %}
-                <div class="summary">{{ article.summary }}
-                    {% include 'includes/comment_count.html' %}
-                    <a class="btn btn-default btn-xs" href="{{ SITEURL }}/{{ article.url }}">阅读更多 ...</a>
+                <div class="summary">
+                    <p> {{ article.summary }} </p>
+                    <div class="readmore">
+                      <a class="btn btn-default btn-xs" href="{{ SITEURL }}/{{ article.url }}">阅读全文</a>
+                    </div>
                 </div>
            </div>
         </div>
 		</div>
             </article>
-            <hr/>
         {% endfor %}
     {% endif %}
 

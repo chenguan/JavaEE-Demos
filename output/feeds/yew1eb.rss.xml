@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>yew1eb's blog</title><link>yew1eb.github.io/</link><description></description><atom:link href="yew1eb.github.io/feeds%5Cyew1eb.rss.xml" rel="self"></atom:link><lastBuildDate>Tue, 24 Feb 2015 16:33:00 +0800</lastBuildDate><item><title>Pelican-Blog文章格式和Markdown基本语法</title><link>yew1eb.github.io/2015/02/first-article.html</link><description>&lt;h2&gt;pelican-blog文章的基本格式&lt;/h2&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>yew1eb's blog</title><link>yew1eb.github.io/</link><description></description><atom:link href="yew1eb.github.io/feeds%5Cyew1eb.rss.xml" rel="self"></atom:link><lastBuildDate>Tue, 24 Feb 2015 16:33:00 +0800</lastBuildDate><item><title>Pelican文章格式和Markdown基本语法</title><link>yew1eb.github.io/2015/02/first-article.html</link><description>&lt;h2&gt;pelican-blog文章的基本格式&lt;/h2&gt;
 &lt;hr /&gt;
 &lt;p&gt;Title: 标题&lt;br /&gt;
 Date: 日期&lt;br /&gt;

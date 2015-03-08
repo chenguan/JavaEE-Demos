@@ -158,14 +158,13 @@ figure.floatcenter, .align-center {
     margin-right: 10px;
 }
 
-.archives_titles dt {
-    color: #AAAAAA;
+.archives_titles a {
+    color: #1863a1;
 }
 
-.archives_titles dd {
-    font-size: 2em;
+.archives_titles a:hover {
+    color: #0181eb;
 }
-
 .index_titles {
     color: #428bca;
 }

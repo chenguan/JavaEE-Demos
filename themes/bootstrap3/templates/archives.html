@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+﻿{% extends "base.html" %}
 {% block title %}Archives - {{ SITENAME }}{% endblock %}
 {% block breadcrumbs %}
     {% if DISPLAY_BREADCRUMBS %}
@@ -12,13 +12,14 @@
 {% block content %}
     <section id="content">
         <h1>Archives</h1>
-
-        <dl class="archives_titles">
+        <hr />
+        <ul class="archives_titles">
             {% for article in dates %}
-                <dt>{{ article.locale_date }}</dt>
-                <dd><a href='{{ SITEURL }}/{{ article.url }}'>{{ article.title }}</a></dd>
-                <br/>
+            	<li class="listing-item">
+                <span class="data_class">{{ article.date.strftime('%Y-%m-%d') }}</span> &raquo;
+                <span class="title"><a href='{{ SITEURL }}/{{ article.url }}'>{{ article.title }}</a></span>
+                </li>
             {% endfor %}
-        </dl>
+        </ul>
     </section>
 {% endblock %}

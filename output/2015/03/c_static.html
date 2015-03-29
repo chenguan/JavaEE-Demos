@@ -3,7 +3,7 @@
       xmlns:og="http://ogp.me/ns#"
       xmlns:fb="https://www.facebook.com/2008/fbml">
 <head>
-    <title>Pelican文章格式和Markdown基本语法 - yew1eb's blog</title>
+    <title>static有什么作用？ - yew1eb's blog</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -13,9 +13,9 @@
 	
     <!-- Open Graph tags -->
             <meta property="og:type" content="article"/>
-            <meta property="og:title" content="Pelican文章格式和Markdown基本语法"/>
-            <meta property="og:url" content="../../2015/02/first-article.html"/>
-            <meta property="og:description" content="pelican文章的基本格式和Markdown基本语法笔记"/>
+            <meta property="og:title" content="static有什么作用？"/>
+            <meta property="og:url" content="../../2015/03/c_static.html"/>
+            <meta property="og:description" content="面试题：static有什么作用？ 答：在C语言中，static主要定义全局静态变量，定义局部静态变量，定义静态函数 一、 定义全局静态变量 ：在全局变量前面加上关键字static ..."/>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="../../theme/css/bootstrap.yeti.min.css" type="text/css"/>
@@ -69,10 +69,10 @@ yew1eb's blog            </a>
         <article>
             <header class="page-header">
                 <h1>
-                    <a href="../../2015/02/first-article.html"
+                    <a href="../../2015/03/c_static.html"
                        rel="bookmark"
-                       title="Permalink to Pelican文章格式和Markdown基本语法">
-                        Pelican文章格式和Markdown基本语法
+                       title="Permalink to static有什么作用？">
+                        static有什么作用？
                     </a>
                 </h1>
             </header>
@@ -82,7 +82,7 @@ yew1eb's blog            </a>
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published article_info">
-        <i class="fa fa-calendar"></i><time datetime="2015-02-24T16:33:00+08:00"> 2015-02-24 16:33:00</time>
+        <i class="fa fa-calendar"></i><time datetime="2015-03-12T12:15:15+08:00"> 2015-03-12 12:15:15</time>
     </span>
         <span class="label label-default">By</span>
         <span class="published article_info">
@@ -91,94 +91,38 @@ yew1eb's blog            </a>
 
     <span class="label label-default">Category</span>
     <span class="published article_info">
-        <a href="../../category/ri-chang.html">日常</a>
+        <a href="../../category/cc.html">C/C++</a>
     </span>
 
 	
 <span class="label label-default">Tags</span>
-	<a href="../../tag/pelican.html">pelican</a>
-        /
-	<a href="../../tag/markdown.html">Markdown</a>
+	<a href="../../tag/cc.html">C/C++</a>
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <h2>pelican-blog文章的基本格式</h2>
-<hr />
-<p>Title: 标题<br />
-Date: 日期<br />
-Category: 分类<br />
-Tags: 标签<br />
-Slug: 生成的url<br />
-Summary: 描述部分<br />
-正文部分。。。 </p>
-<hr />
-<h2>Markdown基本语法</h2>
-<p>&emsp;&emsp;Markdown是一个将文本转化为HTML的工具。简单来说，Markdown是一个兼顾可读性与易用性的轻量级标记体系。Markdown并不追求大而全，它只关心HTML里最常用的几个标记，对于一些不常用的标记它允许直接将HTML标记插入文本。  </p>
-<h3><strong>基本符号</strong></h3>
-<ul>
-<li>*,-,+ 这3个符号效果都一样</li>
-</ul>
-<hr />
-<h3><strong>换行</strong></h3>
-<ul>
-<li>空白行表示另起一个段落</li>
-<li>在文末加上连续两个空格,表示换行</li>
-<li>连续3个符号，然后回车，表示 hr水平分隔线</li>
-</ul>
-<hr />
-<h3><strong>标题</strong></h3>
-<ul>
-<li>连续#的个数对应h1~h6</li>
-<li>在文字左右各加两个符号，表示加粗</li>
-<li>在文字左右各加一个符号，表示斜体</li>
-</ul>
-<hr />
-<h3><strong>引用</strong></h3>
-<ul>
-<li>行首使用&gt;加上一个空格表示引用段落，可以嵌套使用</li>
-</ul>
-<hr />
-<h3><strong>列表</strong></h3>
-<ul>
-<li>无序列表使用*、+或-后面加上空格来表示</li>
-<li>有序列表使用数字加英文句号加空格表示</li>
-</ul>
-<hr />
-<h3><strong>代码区域</strong></h3>
-<ul>
-<li>行内代码使用反斜杠`表示</li>
-<li>代码段落则是在每行文字前加4个空格或者1个缩进符表示</li>
-</ul>
-<hr />
-<h3><strong>链接</strong></h3>
-<div class="highlight"><pre>+ 直接写: [链接文本](url &quot;可选的标题&quot;)
-+ 引用: [链接文本][id] ，[id]: url &quot;可选的标题&quot;， 定义部分可以出现在文本中的其他位置，ref一般用数字表示。
-+ 简写: url: &lt;url&gt; 链接文本即url
+                <p>面试题：static有什么作用？</p>
+<p>答：在C语言中，static主要定义全局静态变量，定义局部静态变量，定义静态函数</p>
+<p>一、       定义全局静态变量 ：在全局变量前面加上关键字static，该全局变量变成了全局静态变量。全局静态变量有以下特点：</p>
+<p>（1）       在全局数据区内分配内存</p>
+<p>（2）       如果没有初始化，其默认值为0</p>
+<p>（3）       该变量在本文件内从定义开始到文件结束可见</p>
+<p>二、       定义局部静态变量：在局部静态变量前面加上关键字static，该局部变量便成了静态局部变量。静态局部变量有以下特点:</p>
+<p>（1）       该变量在全局数据区分配内存</p>
+<p>（2）       如果不显示初始化，那么将被隐式初始化为0</p>
+<p>（3）       它始终驻留在全局数据区，直到程序运行结束</p>
+<p>（4）       其作用域为局部作用域，当定义它的函数或语句块结束时，其作用域随之结束。</p>
+<p>三、       定义静态函数：在函数的返回类型加上static关键字，函数即被定义成静态函数。静态函数有以下特点：</p>
+<p>（1）       静态函数只能在本源文件中使用</p>
+<p>（2）       在文件作用域中声明的inline函数默认为static</p>
+<div class="highlight"><pre>            说明：静态函数只是一个普通的全局函数，只不过受static限制，他只能在文件坐在的编译单位内使用，不能呢个在其他编译单位内使用。
 </pre></div>
 
 
-<hr />
-<h3><strong>图片</strong></h3>
-<div class="highlight"><pre>+ 直接写: ![alt_text](url &quot;可选的title&quot;)
-+ 引用: ![alt_text][id],预先定义 [id]:url &quot;可选title&quot;
-+ 直接使用&lt;img&gt;标签，这样可以指定图片的大小尺寸
-</pre></div>
-
-
-<hr />
-<h3><strong>转义字符</strong></h3>
-<div class="highlight"><pre>+ \\ 反斜杠  
-+ \` 反引号  
-+ \* 星号  
-+ \_ 下划线  
-+ \{\} 大括号  
-+ \[\] 中括号  
-+ \(\) 小括号  
-+ \# 井号  
-+ \+ 加号  
-+ \- 减号  
-+ \. 英文句号  
-+ \! 感叹号
-</pre></div>
+<p>在C++语言中新增了两种作用：定义静态数据成员或静态函数成员</p>
+<p>一，       定义静态数据成员。静态数据成员有如下特点：</p>
+<p>（1）       内存分配：在程序的全局数据区分配</p>
+<p>（2）       初始化和定义：静态数据成员定义时要分配空间，所以不能在类声明中初始化。</p>
+<p>二，       静态成员函数。静态成员函数与类相联系，不与类的对象相联系。静态成员函数不能访问非静态数据成员。原因很简单，非静态数据成员属于特定的类实例，静态成员函数主要用于对静态数据成员的操作。</p>
+<p>（1）       静态成员函数没有this指针。</p>
             </div>
             <br />
     <!-- JiaThis Button BEGIN -->
@@ -210,8 +154,13 @@ Summary: 描述部分<br />
         <hr />
         <ul>
             <li>
-                <a href="../../2015/03/c_static.html">
-                    下一篇文章：static有什么作用？
+                <a href="../../2015/02/first-article.html">
+                    上一篇文章：Pelican文章格式和Markdown基本语法
+                </a>
+            </li>
+            <li>
+                <a href="../../2015/03/linux-init.html">
+                    下一篇文章：Linux系统学习笔记：序
                 </a>
             </li>
         </ul>
@@ -219,8 +168,8 @@ Summary: 描述部分<br />
 			
 			
 <!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="first-article" 
-	data-title="Pelican文章格式和Markdown基本语法" data-url="../../2015/02/first-article.html"></div>
+	<div class="ds-thread" data-thread-key="c_static" 
+	data-title="static有什么作用？" data-url="../../2015/03/c_static.html"></div>
 <!-- 多说评论框 end -->
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">

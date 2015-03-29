@@ -114,7 +114,7 @@ BOOTSTRAP_THEME = 'spacelab'
 PYGMENTS_STYLE = 'monokai'
 
 # 导航栏目
-MENUITEMS =() #(('首页', '#'), )
+MENUITEMS =(('csdn博客(ACM)','http://blog.csdn.net/yew1eb/'),) #(('首页', '#'), )
 DISPLAY_PAGES_ON_MENU = True #显示 pages页面
 DISPLAY_CATEGORIES_ON_MENU = False
 

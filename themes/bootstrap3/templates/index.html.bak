@@ -17,7 +17,7 @@
                 <div class="summary">
                     <p> {{ article.summary }} </p>
                     <div class="readmore">
-                      <a class="btn btn-primary btn-xs" href="{{ SITEURL }}/{{ article.url }}">阅读全文</a>
+                      <a class="btn btn-success  btn-xs" href="{{ SITEURL }}/{{ article.url }}">阅读全文</a>
                     </div>
                 </div>
            </div>

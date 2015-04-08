@@ -1,5 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>yew1eb's blog</title><link href="yew1eb.github.io/" rel="alternate"></link><link href="yew1eb.github.io/feeds%5Cyew1eb.atom.xml" rel="self"></link><id>yew1eb.github.io/</id><updated>2015-03-16T09:54:35+08:00</updated><entry><title>Linux系统学习笔记：进程间通信</title><link href="yew1eb.github.io/2015/03/linux-file-ipc.html" rel="alternate"></link><updated>2015-03-16T09:54:35+08:00</updated><author><name>yew1eb</name></author><id>tag:,2015-03-16:yew1eb.github.io/2015/03/linux-file-ipc.html</id><summary type="html">&lt;p&gt;Linux系统的进程间通信（IPC）机制包括管道、FIFO、消息队列、信号量、共享存储和套接字，此外还有一些可选的如流等方式。管道、FIFO、消息队列、信号量和共享存储器属于经典的进程间通信机制，它们用于同一台主机的进程间通信。本篇总结这些进程间通信机制，下一篇总结使用套接字的进程间通信的方法。&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>yew1eb's blog</title><link href="yew1eb.github.io/" rel="alternate"></link><link href="yew1eb.github.io/feeds%5Cyew1eb.atom.xml" rel="self"></link><id>yew1eb.github.io/</id><updated>2015-04-04T19:49:31+08:00</updated><entry><title>Linux系统学习笔记：文件属性与权限</title><link href="yew1eb.github.io/2015/04/linux-File_attribute_and_authority.html" rel="alternate"></link><updated>2015-04-04T19:49:31+08:00</updated><author><name>yew1eb</name></author><id>tag:,2015-04-04:yew1eb.github.io/2015/04/linux-File_attribute_and_authority.html</id><summary type="html">&lt;h3&gt;学习文章&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://blog.csdn.net/politefish/article/details/4552914"&gt;Linux 文件类型 及文件的扩展名&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.cnblogs.com/kzloser/articles/2673790.html"&gt;linux 文件属性与权限&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://blog.csdn.net/kension/article/details/3796603"&gt;LINUX 硬链接与软链接的区别&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</summary><category term="Linux"></category></entry><entry><title>c++中的结构体大小计算（内存对齐）</title><link href="yew1eb.github.io/2015/03/C_plus_plus_struct.html" rel="alternate"></link><updated>2015-03-31T13:05:48+08:00</updated><author><name>yew1eb</name></author><id>tag:,2015-03-31:yew1eb.github.io/2015/03/C_plus_plus_struct.html</id><summary type="html">&lt;h3&gt;参考文章&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://www.cnblogs.com/ppboy_dxh/archive/2013/08/21/3273376.html"&gt;计算结构体大小&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</summary><category term="C/C++"></category><category term="volatile"></category></entry><entry><title>c++中的volatile关键字</title><link href="yew1eb.github.io/2015/03/C_plus_plus_volatile.html" rel="alternate"></link><updated>2015-03-31T13:05:48+08:00</updated><author><name>yew1eb</name></author><id>tag:,2015-03-31:yew1eb.github.io/2015/03/C_plus_plus_volatile.html</id><summary type="html">&lt;p&gt;&amp;nbsp;volatile和const关键字一样，是一个类型修饰符，表示变量可以被编译器的某些未知因素修改，比如操作系统，硬件，某些线程等。遇到这个关键字声明的变量，编译器访问该变量的代码将不再进行优化，以提供特殊地址的稳定访问。&lt;/p&gt;
+&lt;p&gt;使用该关键字的例子如下： &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;int volatile nVint;//当要求使用volatile声明的变量的值的时候，系统总是重新从它所在的内存读取数据，即使它前面的指令刚刚从该处读取过数据。而且读取的数据立刻被保存。
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;对于这样的代码：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;volatile int i = 10; 
+int a = i;
+... //其他代码，并未明确告诉编译器，对i进行过操作
+int b = i;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;volatile 指出 i是随时可能发生变化的，每次使用它的时候必须从i的地址中读取，因而编译器生成的汇编代码会重新从i的地址读取数据放在b中。而优化做法是，由于编译器发现两次从i读数据的代码之间的代码没有对i进行过操作，它会自动把上次读的数据放在b中。而不是重新从i里面读。这样以来，如果i是一个寄存器变量或者表示一个端口数据就容易出错，所以说volatile可以保证对特殊地址的稳定访问。&lt;/p&gt;
+&lt;h3&gt;多线程下的volatile&lt;/h3&gt;
+&lt;p&gt;&amp;nbsp;&amp;nbsp;有些变量是用volatile关键字声明的。当两个线程都要用到某一个变量且该变量的值会被改变时，应该用volatile声明，该关键字的作用是防止优化编译器把变量从内存装入CPU寄存器中。如果变量被装入寄存器，那么两个线程有可能一个使用内存中的变量，一个使用寄存器中的变量，这会造成程序的错误执行。volatile的意思是让编译器每次操作该变量时一定要从内存中真正取出，而不是使用已经存在寄存器中的值。&lt;/p&gt;
+&lt;h3&gt;一般说来，volatile用在如下的几个地方&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;中断服务程序中修改的供其它程序检测的变量需要加volatile；&lt;/li&gt;
+&lt;li&gt;多任务环境下各任务间共享的标志应该加volatile；&lt;/li&gt;
+&lt;li&gt;存储器映射的硬件寄存器通常也要加volatile说明，因为每次对它的读写都可能由不同意义。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;另外，以上这几种情况经常还要同时考虑数据的完整性（相互关联的几个标志读了一半被打断了重写），在1中可以通过关中断来实现，2中可以禁止任务调度，3中则只能依靠硬件的良好设计了。&lt;/p&gt;
+&lt;h3&gt;参考文章：&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://hedengcheng.com/?p=725"&gt;C/C++ Volatile关键词深度剖析 --何登成&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</summary><category term="C/C++"></category><category term="volatile"></category></entry><entry><title>C++中的虚函数</title><link href="yew1eb.github.io/2015/03/C_plus_plus_virtual.html" rel="alternate"></link><updated>2015-03-30T00:00:00+08:00</updated><author><name>yew1eb</name></author><id>tag:,2015-03-30:yew1eb.github.io/2015/03/C_plus_plus_virtual.html</id><summary type="html">&lt;h3&gt;参考文章&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://blog.csdn.net/haoel/article/details/1948051/"&gt;C++ 虚函数表解析 --陈皓&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://blog.chinaunix.net/uid-23735893-id-2976429.html"&gt;虚函数 原理&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</summary><category term="C/C++"></category><category term="虚函数"></category></entry><entry><title>Linux系统学习笔记：进程</title><link href="yew1eb.github.io/2015/03/linux-process.html" rel="alternate"></link><updated>2015-03-18T11:22:35+08:00</updated><author><name>yew1eb</name></author><id>tag:,2015-03-18:yew1eb.github.io/2015/03/linux-process.html</id><summary type="html">&lt;p&gt;Linux系统学习笔记：进程&lt;/p&gt;</summary><category term="Linux"></category></entry><entry><title>Linux系统学习笔记：进程间通信</title><link href="yew1eb.github.io/2015/03/linux-file-ipc.html" rel="alternate"></link><updated>2015-03-16T09:54:35+08:00</updated><author><name>yew1eb</name></author><id>tag:,2015-03-16:yew1eb.github.io/2015/03/linux-file-ipc.html</id><summary type="html">&lt;p&gt;Linux系统的进程间通信（IPC）机制包括__管道(pipe)&lt;strong&gt;、__FIFO&lt;/strong&gt;、&lt;strong&gt;消息队列&lt;/strong&gt;、&lt;strong&gt;信号量(semaphore)&lt;/strong&gt;、共享存储和__套接字(socket)__，此外还有一些可选的如流等方式。管道、FIFO、消息队列、信号量和共享存储器属于经典的进程间通信机制，它们用于同一台主机的进程间通信。本篇总结这些进程间通信机制，下一篇总结使用套接字的进程间通信的方法。&lt;/p&gt;
 &lt;hr /&gt;
 &lt;p&gt;[TOC]&lt;/p&gt;
 &lt;h2&gt;管道&lt;/h2&gt;
@@ -404,38 +443,48 @@ ftok 函数由路径名和项目ID产生键。&lt;/p&gt;
 &lt;p&gt;信号量&lt;/p&gt;
 &lt;p&gt;信号量是一个计数器，用于多进程对共享数据对象的访问。进程获取共享资源时，测试控制该资源的信号量。若信号量的值为正，则进程可以使用资源，进程将信号量的值减1；若信号量的值为0，则进程休眠直到信号量的值大于0。进程不再使用资源时，信号量的值加1，如果有休眠等待的进程，则唤醒它们，进程被唤醒后，重新测试。&lt;/p&gt;
 &lt;p&gt;信号量集是一个或多个信号量的集合，内核为每个信号量集设置了一个 semid_ds 结构，它的定义如下：&lt;/p&gt;
-&lt;p&gt;struct semid_ds {
+&lt;div class="highlight"&gt;&lt;pre&gt;struct semid_ds {
     struct ipc_perm sem_perm;
-    time_t          sem_otime; /&lt;em&gt; 上次semop的时间 &lt;/em&gt;/
-    time_t          sem_ctime; /&lt;em&gt; 上次修改的时间 &lt;/em&gt;/
-    unsigned short  sem_nsems; /&lt;em&gt; 信号量数量 &lt;/em&gt;/
+    time_t          sem_otime; /* 上次semop的时间 */
+    time_t          sem_ctime; /* 上次修改的时间 */
+    unsigned short  sem_nsems; /* 信号量数量 */
 };
-每个信号量是一个无名结构，包含下列成员：&lt;/p&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;每个信号量是一个无名结构，包含下列成员：&lt;/p&gt;
 &lt;p&gt;unsigned short  semval;   /&lt;em&gt; 信号量的值，&amp;gt;=0 &lt;/em&gt;/
 unsigned short  semzcnt;  /&lt;em&gt; 等待信号量的值为0的进程 &lt;/em&gt;/
 unsigned short  semncnt;  /&lt;em&gt; 等待信号量的值增加的进程 &lt;/em&gt;/
 pid_t           sempid;   /&lt;em&gt; 上次操作的进程ID &lt;/em&gt;/
 semget 函数创建新信号量集或引用现存的信号量集。创建新信号量集时， nsems 指定 sem_nsems ， semflg 指定 sem_perm.mode 的权限位设置。引用现存的信号量集时， nsems 设为0。&lt;/p&gt;
-&lt;h1&gt;include &lt;sys/types.h&gt;&lt;/h1&gt;
-&lt;h1&gt;include &lt;sys/ipc.h&gt;&lt;/h1&gt;
-&lt;h1&gt;include &lt;sys/sem.h&gt;&lt;/h1&gt;
-&lt;p&gt;/&lt;em&gt; 创建新信号量集或引用现存的信号量集
- * @return      成功返回信号量集ID，出错返回-1 &lt;/em&gt;/
-int semget(key_t key, int nsems, int semflg);
-semctl 函数执行对信号量的操作。&lt;/p&gt;
-&lt;h1&gt;include &lt;sys/types.h&gt;&lt;/h1&gt;
-&lt;h1&gt;include &lt;sys/ipc.h&gt;&lt;/h1&gt;
-&lt;h1&gt;include &lt;sys/sem.h&gt;&lt;/h1&gt;
-&lt;p&gt;/&lt;em&gt; 执行对信号量的操作 &lt;/em&gt;/
-int semctl(int semid, int semnum, int cmd, ... /&lt;em&gt; union semun arg &lt;/em&gt;/);
-第四个参数是可选的，它的类型为联合 semun ，该联合的定义如下：&lt;/p&gt;
-&lt;p&gt;union semun {
-    int             val;    /&lt;em&gt; 用于SETVAL的值 &lt;/em&gt;/
-    struct semid_ds &lt;em&gt;buf;   /&lt;/em&gt; 用于IPC_STAT, IPC_SET的缓冲 &lt;em&gt;/
-    unsigned short  &lt;/em&gt;array; /&lt;em&gt; 用于GETALL, SETALL的数组 &lt;/em&gt;/
-    struct seminfo  &lt;em&gt;__buf; /&lt;/em&gt; 用于IPC_INFO的缓冲 */
-};
-cmd 参数可以指定的命令有：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;#include &amp;lt;sys/types.h&amp;gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#include &amp;lt;sys/ipc.h&amp;gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#include &amp;lt;sys/sem.h&amp;gt;&lt;/span&gt;
+
+&lt;span class="cm"&gt;/* 创建新信号量集或引用现存的信号量集&lt;/span&gt;
+&lt;span class="cm"&gt; * @return      成功返回信号量集ID，出错返回-1 */&lt;/span&gt;
+&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="nf"&gt;semget&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;key_t&lt;/span&gt; &lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;nsems&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;semflg&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="n"&gt;semctl&lt;/span&gt; &lt;span class="err"&gt;函数执行对信号量的操作。&lt;/span&gt;
+
+&lt;span class="cp"&gt;#include &amp;lt;sys/types.h&amp;gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#include &amp;lt;sys/ipc.h&amp;gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#include &amp;lt;sys/sem.h&amp;gt;&lt;/span&gt;
+
+&lt;span class="cm"&gt;/* 执行对信号量的操作 */&lt;/span&gt;
+&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;semctl&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;semid&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;semnum&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;cmd&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;...&lt;/span&gt; &lt;span class="cm"&gt;/* union semun arg */&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="err"&gt;第四个参数是可选的，它的类型为联合&lt;/span&gt; &lt;span class="n"&gt;semun&lt;/span&gt; &lt;span class="err"&gt;，该联合的定义如下：&lt;/span&gt;
+
+&lt;span class="k"&gt;union&lt;/span&gt; &lt;span class="n"&gt;semun&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="kt"&gt;int&lt;/span&gt;             &lt;span class="n"&gt;val&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;    &lt;span class="cm"&gt;/* 用于SETVAL的值 */&lt;/span&gt;
+    &lt;span class="k"&gt;struct&lt;/span&gt; &lt;span class="n"&gt;semid_ds&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;buf&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;   &lt;span class="cm"&gt;/* 用于IPC_STAT, IPC_SET的缓冲 */&lt;/span&gt;
+    &lt;span class="kt"&gt;unsigned&lt;/span&gt; &lt;span class="kt"&gt;short&lt;/span&gt;  &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="cm"&gt;/* 用于GETALL, SETALL的数组 */&lt;/span&gt;
+    &lt;span class="k"&gt;struct&lt;/span&gt; &lt;span class="n"&gt;seminfo&lt;/span&gt;  &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;__buf&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="cm"&gt;/* 用于IPC_INFO的缓冲 */&lt;/span&gt;
+&lt;span class="p"&gt;};&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;cmd 参数可以指定的命令有：&lt;/p&gt;
 &lt;p&gt;IPC_STAT ：取信号量集的 semid_ds 结构，存放在 arg.buf 指向的结构中。
 IPC_SET ：根据 arg.buf 指向的结构中的值设置信号量集 semid_ds 结构中的 sem_perm.uid 、 sem_perm.gid 、 sem_perm.mode 。进程必须是超级用户进程或有效用户ID等于 sem_perm.cuid 或 sem_perm.uid 。
 IPC_RMID ：从系统中删除信号量集，删除会立即生效。进程必须是超级用户进程或有效用户ID等于 sem_perm.cuid 或 sem_perm.uid 。
@@ -449,21 +498,26 @@ SETALL ：根据 arg.array 指向的数组中的值设置信号量集中所有�
 针对特定信号量时，用 semnum 指定信号量，它取0到 nsems-1 之间的值。&lt;/p&gt;
 &lt;p&gt;除 GETALL 之外的 GET 命令，函数返回结果，其他命令函数返回0，出错时返回-1。&lt;/p&gt;
 &lt;p&gt;semop 自动执行信号量集上的操作数组。&lt;/p&gt;
-&lt;h1&gt;include &lt;sys/types.h&gt;&lt;/h1&gt;
-&lt;h1&gt;include &lt;sys/ipc.h&gt;&lt;/h1&gt;
-&lt;h1&gt;include &lt;sys/sem.h&gt;&lt;/h1&gt;
-&lt;p&gt;/&lt;em&gt; 执行信号量集上的操作数组
- * @return      成功返回0，出错返回-1 &lt;/em&gt;/
-int semop(int semid, struct sembuf &lt;em&gt;sops, unsigned nsops);
-int semtimedop(int semid, struct sembuf &lt;/em&gt;sops, unsigned nsops,
-               struct timespec *timeout);
-sops 参数指向信号量操作数组，信号量操作由 sembuf 结构表示：&lt;/p&gt;
-&lt;p&gt;struct sembuf {
-    unsigned short sem_num; /&lt;em&gt; semnum &lt;/em&gt;/
-    short    sem_op;        /&lt;em&gt; 操作 &lt;/em&gt;/
-    short    sem_flg;       /&lt;em&gt; 操作选项 &lt;/em&gt;/
-};
-nsops 参数指定数组的元素数。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;#include &amp;lt;sys/types.h&amp;gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#include &amp;lt;sys/ipc.h&amp;gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#include &amp;lt;sys/sem.h&amp;gt;&lt;/span&gt;
+
+&lt;span class="cm"&gt;/* 执行信号量集上的操作数组&lt;/span&gt;
+&lt;span class="cm"&gt; * @return      成功返回0，出错返回-1 */&lt;/span&gt;
+&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="nf"&gt;semop&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;semid&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;struct&lt;/span&gt; &lt;span class="n"&gt;sembuf&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;sops&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;unsigned&lt;/span&gt; &lt;span class="n"&gt;nsops&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="nf"&gt;semtimedop&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;semid&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;struct&lt;/span&gt; &lt;span class="n"&gt;sembuf&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;sops&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;unsigned&lt;/span&gt; &lt;span class="n"&gt;nsops&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+               &lt;span class="k"&gt;struct&lt;/span&gt; &lt;span class="n"&gt;timespec&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;timeout&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="n"&gt;sops&lt;/span&gt; &lt;span class="err"&gt;参数指向信号量操作数组，信号量操作由&lt;/span&gt; &lt;span class="n"&gt;sembuf&lt;/span&gt; &lt;span class="err"&gt;结构表示：&lt;/span&gt;
+
+&lt;span class="k"&gt;struct&lt;/span&gt; &lt;span class="n"&gt;sembuf&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="kt"&gt;unsigned&lt;/span&gt; &lt;span class="kt"&gt;short&lt;/span&gt; &lt;span class="n"&gt;sem_num&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="cm"&gt;/* semnum */&lt;/span&gt;
+    &lt;span class="kt"&gt;short&lt;/span&gt;    &lt;span class="n"&gt;sem_op&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;        &lt;span class="cm"&gt;/* 操作 */&lt;/span&gt;
+    &lt;span class="kt"&gt;short&lt;/span&gt;    &lt;span class="n"&gt;sem_flg&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;       &lt;span class="cm"&gt;/* 操作选项 */&lt;/span&gt;
+&lt;span class="p"&gt;};&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;nsops 参数指定数组的元素数。&lt;/p&gt;
 &lt;p&gt;sem_op 有三种取值：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;0 时，表示释放该信号量控制的资源。信号量的值加上 sem_op ，若 sem_flg 指定了 SEM_UNDO ，则同时信号量的调整值减去 sem_op 。
@@ -493,33 +547,46 @@ nsops 参数指定数组的元素数。&lt;/p&gt;
     /&lt;em&gt; ... &lt;/em&gt;/
 };
 shmget 函数创建新共享存储段或引用现存的共享存储段。创建新共享存储段时， size 指定 shm_segsz ， shmflg 指定 shm_perm.mode 的权限位设置。引用现存的共享存储段时， size 设为0。创建新段时，段的内容会初始化为0。&lt;/p&gt;
-&lt;h1&gt;include &lt;sys/ipc.h&gt;&lt;/h1&gt;
-&lt;h1&gt;include &lt;sys/shm.h&gt;&lt;/h1&gt;
-&lt;p&gt;/&lt;em&gt; 创建新共享存储段或引用现存的共享存储段
- * @return      成功返回共享存储ID，出错返回-1 &lt;/em&gt;/
-int shmget(key_t key, size_t size, int shmflg);
-shmctl 函数执行对共享存储段的操作。&lt;/p&gt;
-&lt;h1&gt;include &lt;sys/ipc.h&gt;&lt;/h1&gt;
-&lt;h1&gt;include &lt;sys/shm.h&gt;&lt;/h1&gt;
-&lt;p&gt;/&lt;em&gt; 执行对共享存储段的操作
- * @return      成功返回0，出错返回-1 &lt;/em&gt;/
-int shmctl(int shmid, int cmd, struct shmid_ds *buf);
-cmd 参数可以指定为：&lt;/p&gt;
-&lt;p&gt;IPC_STAT ：获取共享存储段的 shmid_ds 结构，保存在 buf 中。
-IPC_SET ：根据 buf 指向结构的值，设置 shm_perm.uid 、 shm_perm.gid 、 shm_perm.mode 。进程必须是超级用户进程或有效用户ID等于 shm_perm.cuid 或 shm_perm.uid 。
-IPC_RMID ：从系统中删除共享存储段，此时不能再连接该段，但直到使用该段的最后一个进程终止或和该段脱接时才会实际删除该段。进程必须是超级用户进程或有效用户ID等于 shm_perm.cuid 或 shm_perm.uid 。
-SHM_LOCK ：将共享存储段锁定在内存中，只能由超级用户执行。
-SHM_UNLOCK ：将共享存储段解锁，只能由超级用户执行。
-进程可以用 shmat 函数将共享存储段连接到它的地址空间中，用 shmdt 函数脱接共享存储段。执行成功时 shm_nattch 会相应地加减1。&lt;/p&gt;
-&lt;h1&gt;include &lt;sys/types.h&gt;&lt;/h1&gt;
-&lt;h1&gt;include &lt;sys/shm.h&gt;&lt;/h1&gt;
-&lt;p&gt;/&lt;em&gt; 将共享存储段连接到进程的地址空间中
- * @return      成功返回指向共享存储的指针，出错返回-1 &lt;/em&gt;/
-void &lt;em&gt;shmat(int shmid, const void &lt;/em&gt;shmaddr, int shmflg);
-/&lt;em&gt; 脱接共享存储段
- * @return      成功返回0，出错返回-1 &lt;/em&gt;/
-int shmdt(const void *shmaddr);
-若 shmaddr 为0，则共享存储段连接到内核选择的第一个地址上。若 shmaddr 非0，且 shmflg 没有指定 SHM_RND ，则共享存储段连接到 shmaddr 指定的地址上；若 shmflg 指定了 SHM_RND ，则将 shmaddr 向下取整（ SHMLBA 的倍数）。一般将 shmaddr 设为0。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;#include &amp;lt;sys/ipc.h&amp;gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#include &amp;lt;sys/shm.h&amp;gt;&lt;/span&gt;
+
+&lt;span class="cm"&gt;/* 创建新共享存储段或引用现存的共享存储段&lt;/span&gt;
+&lt;span class="cm"&gt; * @return      成功返回共享存储ID，出错返回-1 */&lt;/span&gt;
+&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="nf"&gt;shmget&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;key_t&lt;/span&gt; &lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;size_t&lt;/span&gt; &lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;shmflg&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="n"&gt;shmctl&lt;/span&gt; &lt;span class="err"&gt;函数执行对共享存储段的操作。&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;#include &amp;lt;sys/ipc.h&amp;gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#include &amp;lt;sys/shm.h&amp;gt;&lt;/span&gt;
+
+&lt;span class="cm"&gt;/* 执行对共享存储段的操作&lt;/span&gt;
+&lt;span class="cm"&gt; * @return      成功返回0，出错返回-1 */&lt;/span&gt;
+&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="nf"&gt;shmctl&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;shmid&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;cmd&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;struct&lt;/span&gt; &lt;span class="n"&gt;shmid_ds&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;buf&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="n"&gt;cmd&lt;/span&gt; &lt;span class="err"&gt;参数可以指定为：&lt;/span&gt;
+
+&lt;span class="n"&gt;IPC_STAT&lt;/span&gt; &lt;span class="err"&gt;：获取共享存储段的&lt;/span&gt; &lt;span class="n"&gt;shmid_ds&lt;/span&gt; &lt;span class="err"&gt;结构，保存在&lt;/span&gt; &lt;span class="n"&gt;buf&lt;/span&gt; &lt;span class="err"&gt;中。&lt;/span&gt;
+&lt;span class="n"&gt;IPC_SET&lt;/span&gt; &lt;span class="err"&gt;：根据&lt;/span&gt; &lt;span class="n"&gt;buf&lt;/span&gt; &lt;span class="err"&gt;指向结构的值，设置&lt;/span&gt; &lt;span class="n"&gt;shm_perm&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;uid&lt;/span&gt; &lt;span class="err"&gt;、&lt;/span&gt; &lt;span class="n"&gt;shm_perm&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;gid&lt;/span&gt; &lt;span class="err"&gt;、&lt;/span&gt; &lt;span class="n"&gt;shm_perm&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mode&lt;/span&gt; &lt;span class="err"&gt;。进程必须是超级用户进程或有效用户&lt;/span&gt;&lt;span class="n"&gt;ID&lt;/span&gt;&lt;span class="err"&gt;等于&lt;/span&gt; &lt;span class="n"&gt;shm_perm&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cuid&lt;/span&gt; &lt;span class="err"&gt;或&lt;/span&gt; &lt;span class="n"&gt;shm_perm&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;uid&lt;/span&gt; &lt;span class="err"&gt;。&lt;/span&gt;
+&lt;span class="n"&gt;IPC_RMID&lt;/span&gt; &lt;span class="err"&gt;：从系统中删除共享存储段，此时不能再连接该段，但直到使用该段的最后一个进程终止或和该段脱接时才会实际删除该段。进程必须是超级用户进程或有效用户&lt;/span&gt;&lt;span class="n"&gt;ID&lt;/span&gt;&lt;span class="err"&gt;等于&lt;/span&gt; &lt;span class="n"&gt;shm_perm&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cuid&lt;/span&gt; &lt;span class="err"&gt;或&lt;/span&gt; &lt;span class="n"&gt;shm_perm&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;uid&lt;/span&gt; &lt;span class="err"&gt;。&lt;/span&gt;
+&lt;span class="n"&gt;SHM_LOCK&lt;/span&gt; &lt;span class="err"&gt;：将共享存储段锁定在内存中，只能由超级用户执行。&lt;/span&gt;
+&lt;span class="n"&gt;SHM_UNLOCK&lt;/span&gt; &lt;span class="err"&gt;：将共享存储段解锁，只能由超级用户执行。&lt;/span&gt;
+&lt;span class="err"&gt;进程可以用&lt;/span&gt; &lt;span class="n"&gt;shmat&lt;/span&gt; &lt;span class="err"&gt;函数将共享存储段连接到它的地址空间中，用&lt;/span&gt; &lt;span class="n"&gt;shmdt&lt;/span&gt; &lt;span class="err"&gt;函数脱接共享存储段。执行成功时&lt;/span&gt; &lt;span class="n"&gt;shm_nattch&lt;/span&gt; &lt;span class="err"&gt;会相应地加减&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="err"&gt;。&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;#include &amp;lt;sys/types.h&amp;gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#include &amp;lt;sys/shm.h&amp;gt;&lt;/span&gt;
+
+&lt;span class="cm"&gt;/* 将共享存储段连接到进程的地址空间中&lt;/span&gt;
+&lt;span class="cm"&gt; * @return      成功返回指向共享存储的指针，出错返回-1 */&lt;/span&gt;
+&lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="nf"&gt;shmat&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;shmid&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;shmaddr&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;shmflg&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="cm"&gt;/* 脱接共享存储段&lt;/span&gt;
+&lt;span class="cm"&gt; * @return      成功返回0，出错返回-1 */&lt;/span&gt;
+&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="nf"&gt;shmdt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;shmaddr&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;若 shmaddr 为0，则共享存储段连接到内核选择的第一个地址上。若 shmaddr 非0，且 shmflg 没有指定 SHM_RND ，则共享存储段连接到 shmaddr 指定的地址上；若 shmflg 指定了 SHM_RND ，则将 shmaddr 向下取整（ SHMLBA 的倍数）。一般将 shmaddr 设为0。&lt;/p&gt;
 &lt;p&gt;shmflg 中指定了 SHM_RDONLY 位时以只读方式连接共享存储段，否则以读写方式连接。&lt;/p&gt;
 &lt;p&gt;脱接共享存储段时并不删除共享存储段，删除它需要使用 IPC_RMID 命令的 shmctl 函数。&lt;/p&gt;
 &lt;h2&gt;XSI IPC的一些问题&lt;/h2&gt;
@@ -685,11 +752,7 @@ fdatasync 对指定文件刷新块缓冲区，等待写磁盘结束，不更新�
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;#include &amp;lt;fcntl.h&amp;gt;&lt;/span&gt;
 &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="nf"&gt;fcntl&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;fd&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;cmd&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;...&lt;/span&gt;&lt;span class="cm"&gt;/* int arg */&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
     &lt;span class="cm"&gt;/*  成功依赖于cmd，出错返回-1 */&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="Linux"></category></entry><entry><title>sizeof</title><link href="yew1eb.github.io/2015/03/sizeof.html" rel="alternate"></link><updated>2015-03-13T16:53:12+08:00</updated><author><name>yew1eb</name></author><id>tag:,2015-03-13:yew1eb.github.io/2015/03/sizeof.html</id><summary type="html">&lt;h3&gt;sizeof&lt;/h3&gt;
-&lt;p&gt;1、  结构体的大小等于结构体内最大成员大小的整数倍
-2、  结构体内的成员的首地址相对于结构体首地址的偏移量是其类型大小的整数倍，比如说double型成员相对于结构体的首地址的地址偏移量应该是8的倍数。&lt;/p&gt;
-&lt;h3&gt;线程安全和线程不安全理解&lt;/h3&gt;
-&lt;p&gt;&lt;a href="http://blog.csdn.net/ghevinn/article/details/37764791"&gt;link&lt;/a&gt;&lt;/p&gt;</summary><category term="C/C++"></category></entry><entry><title>Make 编译工具的使用</title><link href="yew1eb.github.io/2015/03/make.html" rel="alternate"></link><updated>2015-03-13T07:52:17+08:00</updated><author><name>yew1eb</name></author><id>tag:,2015-03-13:yew1eb.github.io/2015/03/make.html</id><summary type="html">&lt;h3&gt;Make 编译工具的使用&lt;/h3&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="Linux"></category></entry><entry><title>Make 编译工具的使用</title><link href="yew1eb.github.io/2015/03/make.html" rel="alternate"></link><updated>2015-03-13T07:52:17+08:00</updated><author><name>yew1eb</name></author><id>tag:,2015-03-13:yew1eb.github.io/2015/03/make.html</id><summary type="html">&lt;h3&gt;Make 编译工具的使用&lt;/h3&gt;
 &lt;hr /&gt;
 &lt;p&gt;&lt;a href="http://linux.cn/article-4930-weibo.html"&gt;Make命令教程&lt;/a&gt;
 &lt;a href="https://www.gnu.org/software/make/manual/make.html"&gt;GNU make&lt;/a&gt;
@@ -758,30 +821,7 @@ fdatasync 对指定文件刷新块缓冲区，等待写磁盘结束，不更新�
 &lt;li&gt;/var/spool 放置“假脱机( spool )”程序的目录，如mail、news、打印队列和其他队列工作的目录。每个不同的spool在/var/spool 下有自己的子目录，例如，用户的邮箱就存放在/var/spool/mail 中。  &lt;/li&gt;
 &lt;li&gt;/var/tmp 比/tmp 允许更大的或需要存在较长时间的临时文件。注意系统管理员可能不允许/var/tmp 有很旧的文件。  &lt;/li&gt;
 &lt;/ol&gt;
-&lt;/blockquote&gt;</summary><category term="Linux"></category></entry><entry><title>static有什么作用？</title><link href="yew1eb.github.io/2015/03/c_static.html" rel="alternate"></link><updated>2015-03-12T12:15:15+08:00</updated><author><name>yew1eb</name></author><id>tag:,2015-03-12:yew1eb.github.io/2015/03/c_static.html</id><summary type="html">&lt;p&gt;面试题：static有什么作用？&lt;/p&gt;
-&lt;p&gt;答：在C语言中，static主要定义全局静态变量，定义局部静态变量，定义静态函数&lt;/p&gt;
-&lt;p&gt;一、       定义全局静态变量 ：在全局变量前面加上关键字static，该全局变量变成了全局静态变量。全局静态变量有以下特点：&lt;/p&gt;
-&lt;p&gt;（1）       在全局数据区内分配内存&lt;/p&gt;
-&lt;p&gt;（2）       如果没有初始化，其默认值为0&lt;/p&gt;
-&lt;p&gt;（3）       该变量在本文件内从定义开始到文件结束可见&lt;/p&gt;
-&lt;p&gt;二、       定义局部静态变量：在局部静态变量前面加上关键字static，该局部变量便成了静态局部变量。静态局部变量有以下特点:&lt;/p&gt;
-&lt;p&gt;（1）       该变量在全局数据区分配内存&lt;/p&gt;
-&lt;p&gt;（2）       如果不显示初始化，那么将被隐式初始化为0&lt;/p&gt;
-&lt;p&gt;（3）       它始终驻留在全局数据区，直到程序运行结束&lt;/p&gt;
-&lt;p&gt;（4）       其作用域为局部作用域，当定义它的函数或语句块结束时，其作用域随之结束。&lt;/p&gt;
-&lt;p&gt;三、       定义静态函数：在函数的返回类型加上static关键字，函数即被定义成静态函数。静态函数有以下特点：&lt;/p&gt;
-&lt;p&gt;（1）       静态函数只能在本源文件中使用&lt;/p&gt;
-&lt;p&gt;（2）       在文件作用域中声明的inline函数默认为static&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;            说明：静态函数只是一个普通的全局函数，只不过受static限制，他只能在文件坐在的编译单位内使用，不能呢个在其他编译单位内使用。
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;在C++语言中新增了两种作用：定义静态数据成员或静态函数成员&lt;/p&gt;
-&lt;p&gt;一，       定义静态数据成员。静态数据成员有如下特点：&lt;/p&gt;
-&lt;p&gt;（1）       内存分配：在程序的全局数据区分配&lt;/p&gt;
-&lt;p&gt;（2）       初始化和定义：静态数据成员定义时要分配空间，所以不能在类声明中初始化。&lt;/p&gt;
-&lt;p&gt;二，       静态成员函数。静态成员函数与类相联系，不与类的对象相联系。静态成员函数不能访问非静态数据成员。原因很简单，非静态数据成员属于特定的类实例，静态成员函数主要用于对静态数据成员的操作。&lt;/p&gt;
-&lt;p&gt;（1）       静态成员函数没有this指针。&lt;/p&gt;</summary><category term="C/C++"></category></entry><entry><title>Pelican文章格式和Markdown基本语法</title><link href="yew1eb.github.io/2015/02/first-article.html" rel="alternate"></link><updated>2015-02-24T16:33:00+08:00</updated><author><name>yew1eb</name></author><id>tag:,2015-02-24:yew1eb.github.io/2015/02/first-article.html</id><summary type="html">&lt;h2&gt;pelican-blog文章的基本格式&lt;/h2&gt;
+&lt;/blockquote&gt;</summary><category term="Linux"></category></entry><entry><title>Pelican文章格式和Markdown基本语法</title><link href="yew1eb.github.io/2015/02/first-article.html" rel="alternate"></link><updated>2015-02-24T16:33:00+08:00</updated><author><name>yew1eb</name></author><id>tag:,2015-02-24:yew1eb.github.io/2015/02/first-article.html</id><summary type="html">&lt;h2&gt;pelican-blog文章的基本格式&lt;/h2&gt;
 &lt;hr /&gt;
 &lt;p&gt;Title: 标题&lt;br /&gt;
 Date: 日期&lt;br /&gt;

@@ -15,7 +15,7 @@
             <meta property="og:type" content="article"/>
             <meta property="og:title" content="Linux系统学习笔记：进程间通信"/>
             <meta property="og:url" content="../../2015/03/linux-file-ipc.html"/>
-            <meta property="og:description" content="Linux系统的进程间通信（IPC）机制包括管道、FIFO、消息队列、信号量、共享存储和套接字，此外还有一些可选的如流等方式。管道、FIFO ..."/>
+            <meta property="og:description" content="Linux系统的进程间通信（IPC）机制包括__管道(pipe)、__FIFO、消息队列、信号量(semaphore)、共享存储和__套接字(socket ..."/>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="../../theme/css/bootstrap.yeti.min.css" type="text/css"/>
@@ -49,6 +49,12 @@ yew1eb's blog            </a>
                           </a></li>
                          <li><a href="../../resume.html">
                              个人简历
+                          </a></li>
+                         <li><a href="../../books.html">
+                             阅读书籍
+                          </a></li>
+                         <li><a href="../../demos.html">
+                             个人项目
                           </a></li>
 				
             </ul>
@@ -99,7 +105,7 @@ yew1eb's blog            </a>
 	<a href="../../tag/linux.html">Linux</a>
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <p>Linux系统的进程间通信（IPC）机制包括管道、FIFO、消息队列、信号量、共享存储和套接字，此外还有一些可选的如流等方式。管道、FIFO、消息队列、信号量和共享存储器属于经典的进程间通信机制，它们用于同一台主机的进程间通信。本篇总结这些进程间通信机制，下一篇总结使用套接字的进程间通信的方法。</p>
+                <p>Linux系统的进程间通信（IPC）机制包括__管道(pipe)<strong>、__FIFO</strong>、<strong>消息队列</strong>、<strong>信号量(semaphore)</strong>、共享存储和__套接字(socket)__，此外还有一些可选的如流等方式。管道、FIFO、消息队列、信号量和共享存储器属于经典的进程间通信机制，它们用于同一台主机的进程间通信。本篇总结这些进程间通信机制，下一篇总结使用套接字的进程间通信的方法。</p>
 <hr />
 <p>[TOC]</p>
 <h2>管道</h2>
@@ -504,38 +510,48 @@ ftok 函数由路径名和项目ID产生键。</p>
 <p>信号量</p>
 <p>信号量是一个计数器，用于多进程对共享数据对象的访问。进程获取共享资源时，测试控制该资源的信号量。若信号量的值为正，则进程可以使用资源，进程将信号量的值减1；若信号量的值为0，则进程休眠直到信号量的值大于0。进程不再使用资源时，信号量的值加1，如果有休眠等待的进程，则唤醒它们，进程被唤醒后，重新测试。</p>
 <p>信号量集是一个或多个信号量的集合，内核为每个信号量集设置了一个 semid_ds 结构，它的定义如下：</p>
-<p>struct semid_ds {
+<div class="highlight"><pre>struct semid_ds {
     struct ipc_perm sem_perm;
-    time_t          sem_otime; /<em> 上次semop的时间 </em>/
-    time_t          sem_ctime; /<em> 上次修改的时间 </em>/
-    unsigned short  sem_nsems; /<em> 信号量数量 </em>/
+    time_t          sem_otime; /* 上次semop的时间 */
+    time_t          sem_ctime; /* 上次修改的时间 */
+    unsigned short  sem_nsems; /* 信号量数量 */
 };
-每个信号量是一个无名结构，包含下列成员：</p>
+</pre></div>
+
+
+<p>每个信号量是一个无名结构，包含下列成员：</p>
 <p>unsigned short  semval;   /<em> 信号量的值，&gt;=0 </em>/
 unsigned short  semzcnt;  /<em> 等待信号量的值为0的进程 </em>/
 unsigned short  semncnt;  /<em> 等待信号量的值增加的进程 </em>/
 pid_t           sempid;   /<em> 上次操作的进程ID </em>/
 semget 函数创建新信号量集或引用现存的信号量集。创建新信号量集时， nsems 指定 sem_nsems ， semflg 指定 sem_perm.mode 的权限位设置。引用现存的信号量集时， nsems 设为0。</p>
-<h1>include <sys/types.h></h1>
-<h1>include <sys/ipc.h></h1>
-<h1>include <sys/sem.h></h1>
-<p>/<em> 创建新信号量集或引用现存的信号量集
- * @return      成功返回信号量集ID，出错返回-1 </em>/
-int semget(key_t key, int nsems, int semflg);
-semctl 函数执行对信号量的操作。</p>
-<h1>include <sys/types.h></h1>
-<h1>include <sys/ipc.h></h1>
-<h1>include <sys/sem.h></h1>
-<p>/<em> 执行对信号量的操作 </em>/
-int semctl(int semid, int semnum, int cmd, ... /<em> union semun arg </em>/);
-第四个参数是可选的，它的类型为联合 semun ，该联合的定义如下：</p>
-<p>union semun {
-    int             val;    /<em> 用于SETVAL的值 </em>/
-    struct semid_ds <em>buf;   /</em> 用于IPC_STAT, IPC_SET的缓冲 <em>/
-    unsigned short  </em>array; /<em> 用于GETALL, SETALL的数组 </em>/
-    struct seminfo  <em>__buf; /</em> 用于IPC_INFO的缓冲 */
-};
-cmd 参数可以指定的命令有：</p>
+<div class="highlight"><pre><span class="cp">#include &lt;sys/types.h&gt;</span>
+<span class="cp">#include &lt;sys/ipc.h&gt;</span>
+<span class="cp">#include &lt;sys/sem.h&gt;</span>
+
+<span class="cm">/* 创建新信号量集或引用现存的信号量集</span>
+<span class="cm"> * @return      成功返回信号量集ID，出错返回-1 */</span>
+<span class="kt">int</span> <span class="nf">semget</span><span class="p">(</span><span class="kt">key_t</span> <span class="n">key</span><span class="p">,</span> <span class="kt">int</span> <span class="n">nsems</span><span class="p">,</span> <span class="kt">int</span> <span class="n">semflg</span><span class="p">);</span>
+<span class="n">semctl</span> <span class="err">函数执行对信号量的操作。</span>
+
+<span class="cp">#include &lt;sys/types.h&gt;</span>
+<span class="cp">#include &lt;sys/ipc.h&gt;</span>
+<span class="cp">#include &lt;sys/sem.h&gt;</span>
+
+<span class="cm">/* 执行对信号量的操作 */</span>
+<span class="kt">int</span> <span class="n">semctl</span><span class="p">(</span><span class="kt">int</span> <span class="n">semid</span><span class="p">,</span> <span class="kt">int</span> <span class="n">semnum</span><span class="p">,</span> <span class="kt">int</span> <span class="n">cmd</span><span class="p">,</span> <span class="p">...</span> <span class="cm">/* union semun arg */</span><span class="p">);</span>
+<span class="err">第四个参数是可选的，它的类型为联合</span> <span class="n">semun</span> <span class="err">，该联合的定义如下：</span>
+
+<span class="k">union</span> <span class="n">semun</span> <span class="p">{</span>
+    <span class="kt">int</span>             <span class="n">val</span><span class="p">;</span>    <span class="cm">/* 用于SETVAL的值 */</span>
+    <span class="k">struct</span> <span class="n">semid_ds</span> <span class="o">*</span><span class="n">buf</span><span class="p">;</span>   <span class="cm">/* 用于IPC_STAT, IPC_SET的缓冲 */</span>
+    <span class="kt">unsigned</span> <span class="kt">short</span>  <span class="o">*</span><span class="n">array</span><span class="p">;</span> <span class="cm">/* 用于GETALL, SETALL的数组 */</span>
+    <span class="k">struct</span> <span class="n">seminfo</span>  <span class="o">*</span><span class="n">__buf</span><span class="p">;</span> <span class="cm">/* 用于IPC_INFO的缓冲 */</span>
+<span class="p">};</span>
+</pre></div>
+
+
+<p>cmd 参数可以指定的命令有：</p>
 <p>IPC_STAT ：取信号量集的 semid_ds 结构，存放在 arg.buf 指向的结构中。
 IPC_SET ：根据 arg.buf 指向的结构中的值设置信号量集 semid_ds 结构中的 sem_perm.uid 、 sem_perm.gid 、 sem_perm.mode 。进程必须是超级用户进程或有效用户ID等于 sem_perm.cuid 或 sem_perm.uid 。
 IPC_RMID ：从系统中删除信号量集，删除会立即生效。进程必须是超级用户进程或有效用户ID等于 sem_perm.cuid 或 sem_perm.uid 。
@@ -549,21 +565,26 @@ SETALL ：根据 arg.array 指向的数组中的值设置信号量集中所有�
 针对特定信号量时，用 semnum 指定信号量，它取0到 nsems-1 之间的值。</p>
 <p>除 GETALL 之外的 GET 命令，函数返回结果，其他命令函数返回0，出错时返回-1。</p>
 <p>semop 自动执行信号量集上的操作数组。</p>
-<h1>include <sys/types.h></h1>
-<h1>include <sys/ipc.h></h1>
-<h1>include <sys/sem.h></h1>
-<p>/<em> 执行信号量集上的操作数组
- * @return      成功返回0，出错返回-1 </em>/
-int semop(int semid, struct sembuf <em>sops, unsigned nsops);
-int semtimedop(int semid, struct sembuf </em>sops, unsigned nsops,
-               struct timespec *timeout);
-sops 参数指向信号量操作数组，信号量操作由 sembuf 结构表示：</p>
-<p>struct sembuf {
-    unsigned short sem_num; /<em> semnum </em>/
-    short    sem_op;        /<em> 操作 </em>/
-    short    sem_flg;       /<em> 操作选项 </em>/
-};
-nsops 参数指定数组的元素数。</p>
+<div class="highlight"><pre><span class="cp">#include &lt;sys/types.h&gt;</span>
+<span class="cp">#include &lt;sys/ipc.h&gt;</span>
+<span class="cp">#include &lt;sys/sem.h&gt;</span>
+
+<span class="cm">/* 执行信号量集上的操作数组</span>
+<span class="cm"> * @return      成功返回0，出错返回-1 */</span>
+<span class="kt">int</span> <span class="nf">semop</span><span class="p">(</span><span class="kt">int</span> <span class="n">semid</span><span class="p">,</span> <span class="k">struct</span> <span class="n">sembuf</span> <span class="o">*</span><span class="n">sops</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="n">nsops</span><span class="p">);</span>
+<span class="kt">int</span> <span class="nf">semtimedop</span><span class="p">(</span><span class="kt">int</span> <span class="n">semid</span><span class="p">,</span> <span class="k">struct</span> <span class="n">sembuf</span> <span class="o">*</span><span class="n">sops</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="n">nsops</span><span class="p">,</span>
+               <span class="k">struct</span> <span class="n">timespec</span> <span class="o">*</span><span class="n">timeout</span><span class="p">);</span>
+<span class="n">sops</span> <span class="err">参数指向信号量操作数组，信号量操作由</span> <span class="n">sembuf</span> <span class="err">结构表示：</span>
+
+<span class="k">struct</span> <span class="n">sembuf</span> <span class="p">{</span>
+    <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">sem_num</span><span class="p">;</span> <span class="cm">/* semnum */</span>
+    <span class="kt">short</span>    <span class="n">sem_op</span><span class="p">;</span>        <span class="cm">/* 操作 */</span>
+    <span class="kt">short</span>    <span class="n">sem_flg</span><span class="p">;</span>       <span class="cm">/* 操作选项 */</span>
+<span class="p">};</span>
+</pre></div>
+
+
+<p>nsops 参数指定数组的元素数。</p>
 <p>sem_op 有三种取值：</p>
 <blockquote>
 <p>0 时，表示释放该信号量控制的资源。信号量的值加上 sem_op ，若 sem_flg 指定了 SEM_UNDO ，则同时信号量的调整值减去 sem_op 。
@@ -593,33 +614,46 @@ nsops 参数指定数组的元素数。</p>
     /<em> ... </em>/
 };
 shmget 函数创建新共享存储段或引用现存的共享存储段。创建新共享存储段时， size 指定 shm_segsz ， shmflg 指定 shm_perm.mode 的权限位设置。引用现存的共享存储段时， size 设为0。创建新段时，段的内容会初始化为0。</p>
-<h1>include <sys/ipc.h></h1>
-<h1>include <sys/shm.h></h1>
-<p>/<em> 创建新共享存储段或引用现存的共享存储段
- * @return      成功返回共享存储ID，出错返回-1 </em>/
-int shmget(key_t key, size_t size, int shmflg);
-shmctl 函数执行对共享存储段的操作。</p>
-<h1>include <sys/ipc.h></h1>
-<h1>include <sys/shm.h></h1>
-<p>/<em> 执行对共享存储段的操作
- * @return      成功返回0，出错返回-1 </em>/
-int shmctl(int shmid, int cmd, struct shmid_ds *buf);
-cmd 参数可以指定为：</p>
-<p>IPC_STAT ：获取共享存储段的 shmid_ds 结构，保存在 buf 中。
-IPC_SET ：根据 buf 指向结构的值，设置 shm_perm.uid 、 shm_perm.gid 、 shm_perm.mode 。进程必须是超级用户进程或有效用户ID等于 shm_perm.cuid 或 shm_perm.uid 。
-IPC_RMID ：从系统中删除共享存储段，此时不能再连接该段，但直到使用该段的最后一个进程终止或和该段脱接时才会实际删除该段。进程必须是超级用户进程或有效用户ID等于 shm_perm.cuid 或 shm_perm.uid 。
-SHM_LOCK ：将共享存储段锁定在内存中，只能由超级用户执行。
-SHM_UNLOCK ：将共享存储段解锁，只能由超级用户执行。
-进程可以用 shmat 函数将共享存储段连接到它的地址空间中，用 shmdt 函数脱接共享存储段。执行成功时 shm_nattch 会相应地加减1。</p>
-<h1>include <sys/types.h></h1>
-<h1>include <sys/shm.h></h1>
-<p>/<em> 将共享存储段连接到进程的地址空间中
- * @return      成功返回指向共享存储的指针，出错返回-1 </em>/
-void <em>shmat(int shmid, const void </em>shmaddr, int shmflg);
-/<em> 脱接共享存储段
- * @return      成功返回0，出错返回-1 </em>/
-int shmdt(const void *shmaddr);
-若 shmaddr 为0，则共享存储段连接到内核选择的第一个地址上。若 shmaddr 非0，且 shmflg 没有指定 SHM_RND ，则共享存储段连接到 shmaddr 指定的地址上；若 shmflg 指定了 SHM_RND ，则将 shmaddr 向下取整（ SHMLBA 的倍数）。一般将 shmaddr 设为0。</p>
+<div class="highlight"><pre><span class="cp">#include &lt;sys/ipc.h&gt;</span>
+<span class="cp">#include &lt;sys/shm.h&gt;</span>
+
+<span class="cm">/* 创建新共享存储段或引用现存的共享存储段</span>
+<span class="cm"> * @return      成功返回共享存储ID，出错返回-1 */</span>
+<span class="kt">int</span> <span class="nf">shmget</span><span class="p">(</span><span class="kt">key_t</span> <span class="n">key</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">size</span><span class="p">,</span> <span class="kt">int</span> <span class="n">shmflg</span><span class="p">);</span>
+<span class="n">shmctl</span> <span class="err">函数执行对共享存储段的操作。</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span class="cp">#include &lt;sys/ipc.h&gt;</span>
+<span class="cp">#include &lt;sys/shm.h&gt;</span>
+
+<span class="cm">/* 执行对共享存储段的操作</span>
+<span class="cm"> * @return      成功返回0，出错返回-1 */</span>
+<span class="kt">int</span> <span class="nf">shmctl</span><span class="p">(</span><span class="kt">int</span> <span class="n">shmid</span><span class="p">,</span> <span class="kt">int</span> <span class="n">cmd</span><span class="p">,</span> <span class="k">struct</span> <span class="n">shmid_ds</span> <span class="o">*</span><span class="n">buf</span><span class="p">);</span>
+<span class="n">cmd</span> <span class="err">参数可以指定为：</span>
+
+<span class="n">IPC_STAT</span> <span class="err">：获取共享存储段的</span> <span class="n">shmid_ds</span> <span class="err">结构，保存在</span> <span class="n">buf</span> <span class="err">中。</span>
+<span class="n">IPC_SET</span> <span class="err">：根据</span> <span class="n">buf</span> <span class="err">指向结构的值，设置</span> <span class="n">shm_perm</span><span class="p">.</span><span class="n">uid</span> <span class="err">、</span> <span class="n">shm_perm</span><span class="p">.</span><span class="n">gid</span> <span class="err">、</span> <span class="n">shm_perm</span><span class="p">.</span><span class="n">mode</span> <span class="err">。进程必须是超级用户进程或有效用户</span><span class="n">ID</span><span class="err">等于</span> <span class="n">shm_perm</span><span class="p">.</span><span class="n">cuid</span> <span class="err">或</span> <span class="n">shm_perm</span><span class="p">.</span><span class="n">uid</span> <span class="err">。</span>
+<span class="n">IPC_RMID</span> <span class="err">：从系统中删除共享存储段，此时不能再连接该段，但直到使用该段的最后一个进程终止或和该段脱接时才会实际删除该段。进程必须是超级用户进程或有效用户</span><span class="n">ID</span><span class="err">等于</span> <span class="n">shm_perm</span><span class="p">.</span><span class="n">cuid</span> <span class="err">或</span> <span class="n">shm_perm</span><span class="p">.</span><span class="n">uid</span> <span class="err">。</span>
+<span class="n">SHM_LOCK</span> <span class="err">：将共享存储段锁定在内存中，只能由超级用户执行。</span>
+<span class="n">SHM_UNLOCK</span> <span class="err">：将共享存储段解锁，只能由超级用户执行。</span>
+<span class="err">进程可以用</span> <span class="n">shmat</span> <span class="err">函数将共享存储段连接到它的地址空间中，用</span> <span class="n">shmdt</span> <span class="err">函数脱接共享存储段。执行成功时</span> <span class="n">shm_nattch</span> <span class="err">会相应地加减</span><span class="mi">1</span><span class="err">。</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span class="cp">#include &lt;sys/types.h&gt;</span>
+<span class="cp">#include &lt;sys/shm.h&gt;</span>
+
+<span class="cm">/* 将共享存储段连接到进程的地址空间中</span>
+<span class="cm"> * @return      成功返回指向共享存储的指针，出错返回-1 */</span>
+<span class="kt">void</span> <span class="o">*</span><span class="nf">shmat</span><span class="p">(</span><span class="kt">int</span> <span class="n">shmid</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">shmaddr</span><span class="p">,</span> <span class="kt">int</span> <span class="n">shmflg</span><span class="p">);</span>
+<span class="cm">/* 脱接共享存储段</span>
+<span class="cm"> * @return      成功返回0，出错返回-1 */</span>
+<span class="kt">int</span> <span class="nf">shmdt</span><span class="p">(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">shmaddr</span><span class="p">);</span>
+</pre></div>
+
+
+<p>若 shmaddr 为0，则共享存储段连接到内核选择的第一个地址上。若 shmaddr 非0，且 shmflg 没有指定 SHM_RND ，则共享存储段连接到 shmaddr 指定的地址上；若 shmflg 指定了 SHM_RND ，则将 shmaddr 向下取整（ SHMLBA 的倍数）。一般将 shmaddr 设为0。</p>
 <p>shmflg 中指定了 SHM_RDONLY 位时以只读方式连接共享存储段，否则以读写方式连接。</p>
 <p>脱接共享存储段时并不删除共享存储段，删除它需要使用 IPC_RMID 命令的 shmctl 函数。</p>
 <h2>XSI IPC的一些问题</h2>
@@ -670,6 +704,11 @@ UNIX域数据报套接字 是   是   否   是   否
                     上一篇文章：Linux系统学习笔记：文件 IO
                 </a>
             </li>
+            <li>
+                <a href="../../2015/03/linux-process.html">
+                    下一篇文章：Linux系统学习笔记：进程
+                </a>
+            </li>
         </ul>
     </div>
 			
@@ -706,28 +745,28 @@ var duoshuoQuery = {short_name:"yew1eb"};
                 <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">最新日志</span></h4>
                     <ul class="list-group" id="recentposts">
                         <li class="list-group-item">
-                            <a href="../../2015/03/linux-file-ipc.html">
-                                Linux系统学习笔记：进程间通信
+                            <a href="../../2015/04/linux-File_attribute_and_authority.html">
+                                Linux系统学习笔记：文件属性与权限
                             </a>
                         </li>
                         <li class="list-group-item">
-                            <a href="../../2015/03/linux-file-io.html">
-                                Linux系统学习笔记：文件 IO
+                            <a href="../../2015/03/C_plus_plus_struct.html">
+                                c++中的结构体大小计算（内存对齐）
                             </a>
                         </li>
                         <li class="list-group-item">
-                            <a href="../../2015/03/sizeof.html">
-                                sizeof
+                            <a href="../../2015/03/C_plus_plus_volatile.html">
+                                c++中的volatile关键字
                             </a>
                         </li>
                         <li class="list-group-item">
-                            <a href="../../2015/03/make.html">
-                                Make 编译工具的使用
+                            <a href="../../2015/03/C_plus_plus_virtual.html">
+                                C++中的虚函数
                             </a>
                         </li>
                         <li class="list-group-item">
-                            <a href="../../2015/03/linux-init.html">
-                                Linux系统学习笔记：序
+                            <a href="../../2015/03/linux-process.html">
+                                Linux系统学习笔记：进程
                             </a>
                         </li>
                     </ul>
@@ -756,18 +795,18 @@ var duoshuoQuery = {short_name:"yew1eb"};
                 <li class="list-group-item"><a href="../../tag/index.html"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">标签云</span></h4></a>
                     <ul class="list-group" id="tags">
                         <span class="list-group-item tag-4">
-                            <a href="../../tag/markdown.html">
-                                Markdown
-                            </a>
-                        </span>
-                        <span class="list-group-item tag-4">
                             <a href="../../tag/pelican.html">
                                 pelican
                             </a>
                         </span>
+                        <span class="list-group-item tag-1">
+                            <a href="../../tag/cc.html">
+                                C/C++
+                            </a>
+                        </span>
                         <span class="list-group-item tag-4">
-                            <a href="../../tag/make.html">
-                                Make
+                            <a href="../../tag/xu-han-shu.html">
+                                虚函数
                             </a>
                         </span>
                         <span class="list-group-item tag-1">
@@ -775,9 +814,19 @@ var duoshuoQuery = {short_name:"yew1eb"};
                                 Linux
                             </a>
                         </span>
+                        <span class="list-group-item tag-4">
+                            <a href="../../tag/markdown.html">
+                                Markdown
+                            </a>
+                        </span>
                         <span class="list-group-item tag-2">
-                            <a href="../../tag/cc.html">
-                                C/C++
+                            <a href="../../tag/volatile.html">
+                                volatile
+                            </a>
+                        </span>
+                        <span class="list-group-item tag-4">
+                            <a href="../../tag/make.html">
+                                Make
                             </a>
                         </span>
                     </ul>

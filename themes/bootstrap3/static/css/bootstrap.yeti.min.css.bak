@@ -6877,7 +6877,7 @@ label,.control-label,.help-block,.checkbox,.radio {
 
 .pagination>li>a,.pagination>li>span {
 	margin-left: 4px;
-	color: #444444
+	color: #999999
 }
 
 .pagination>.active>a,.pagination>.active>span {

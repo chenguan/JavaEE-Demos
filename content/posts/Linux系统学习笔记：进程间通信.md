@@ -428,13 +428,14 @@ msgflg 设置 MSG_NOERROR 时，若 msgrcv 返回的消息大于 msgsz ，则自
 信号量是一个计数器，用于多进程对共享数据对象的访问。进程获取共享资源时，测试控制该资源的信号量。若信号量的值为正，则进程可以使用资源，进程将信号量的值减1；若信号量的值为0，则进程休眠直到信号量的值大于0。进程不再使用资源时，信号量的值加1，如果有休眠等待的进程，则唤醒它们，进程被唤醒后，重新测试。
 
 信号量集是一个或多个信号量的集合，内核为每个信号量集设置了一个 semid_ds 结构，它的定义如下：
-
+```
 struct semid_ds {
     struct ipc_perm sem_perm;
     time_t          sem_otime; /* 上次semop的时间 */
     time_t          sem_ctime; /* 上次修改的时间 */
     unsigned short  sem_nsems; /* 信号量数量 */
 };
+```
 每个信号量是一个无名结构，包含下列成员：
 
 unsigned short  semval;   /* 信号量的值，>=0 */
@@ -442,7 +443,7 @@ unsigned short  semzcnt;  /* 等待信号量的值为0的进程 */
 unsigned short  semncnt;  /* 等待信号量的值增加的进程 */
 pid_t           sempid;   /* 上次操作的进程ID */
 semget 函数创建新信号量集或引用现存的信号量集。创建新信号量集时， nsems 指定 sem_nsems ， semflg 指定 sem_perm.mode 的权限位设置。引用现存的信号量集时， nsems 设为0。
-
+```
 #include <sys/types.h>
 #include <sys/ipc.h>
 #include <sys/sem.h>
@@ -466,6 +467,7 @@ union semun {
     unsigned short  *array; /* 用于GETALL, SETALL的数组 */
     struct seminfo  *__buf; /* 用于IPC_INFO的缓冲 */
 };
+```
 cmd 参数可以指定的命令有：
 
 IPC_STAT ：取信号量集的 semid_ds 结构，存放在 arg.buf 指向的结构中。
@@ -483,7 +485,7 @@ SETALL ：根据 arg.array 指向的数组中的值设置信号量集中所有�
 除 GETALL 之外的 GET 命令，函数返回结果，其他命令函数返回0，出错时返回-1。
 
 semop 自动执行信号量集上的操作数组。
-
+```
 #include <sys/types.h>
 #include <sys/ipc.h>
 #include <sys/sem.h>
@@ -500,6 +502,7 @@ struct sembuf {
     short    sem_op;        /* 操作 */
     short    sem_flg;       /* 操作选项 */
 };
+```
 nsops 参数指定数组的元素数。
 
 sem_op 有三种取值：
@@ -536,7 +539,7 @@ struct shmid_ds {
     /* ... */
 };
 shmget 函数创建新共享存储段或引用现存的共享存储段。创建新共享存储段时， size 指定 shm_segsz ， shmflg 指定 shm_perm.mode 的权限位设置。引用现存的共享存储段时， size 设为0。创建新段时，段的内容会初始化为0。
-
+```
 #include <sys/ipc.h>
 #include <sys/shm.h>
 
@@ -544,7 +547,8 @@ shmget 函数创建新共享存储段或引用现存的共享存储段。创建�
  * @return      成功返回共享存储ID，出错返回-1 */
 int shmget(key_t key, size_t size, int shmflg);
 shmctl 函数执行对共享存储段的操作。
-
+```
+```
 #include <sys/ipc.h>
 #include <sys/shm.h>
 
@@ -559,7 +563,8 @@ IPC_RMID ：从系统中删除共享存储段，此时不能再连接该段，�
 SHM_LOCK ：将共享存储段锁定在内存中，只能由超级用户执行。
 SHM_UNLOCK ：将共享存储段解锁，只能由超级用户执行。
 进程可以用 shmat 函数将共享存储段连接到它的地址空间中，用 shmdt 函数脱接共享存储段。执行成功时 shm_nattch 会相应地加减1。
-
+```
+```
 #include <sys/types.h>
 #include <sys/shm.h>
 
@@ -569,6 +574,7 @@ void *shmat(int shmid, const void *shmaddr, int shmflg);
 /* 脱接共享存储段
  * @return      成功返回0，出错返回-1 */
 int shmdt(const void *shmaddr);
+```
 若 shmaddr 为0，则共享存储段连接到内核选择的第一个地址上。若 shmaddr 非0，且 shmflg 没有指定 SHM_RND ，则共享存储段连接到 shmaddr 指定的地址上；若 shmflg 指定了 SHM_RND ，则将 shmaddr 向下取整（ SHMLBA 的倍数）。一般将 shmaddr 设为0。
 
 shmflg 中指定了 SHM_RDONLY 位时以只读方式连接共享存储段，否则以读写方式连接。

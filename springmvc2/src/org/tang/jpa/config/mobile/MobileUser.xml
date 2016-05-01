@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.tang.jpa.dao.mobile.MobileUserDao">
+
+	<resultMap type="MobileUserDTO" id="MobileUserDTO">
+		<id 	column="userid" property="userId" />
+		<result column="username" property="userName" />
+		<result column="userpwd" property="userPwd" />
+		<result column="usertype" property="userType" />
+		<result column="userpicurl" property="picUrl" />
+		<result column="orgid" property="orgId" />
+		<result column="departmentid" property="departId" />
+	</resultMap>
+	
+	
+	<resultMap type="UserInfoDTO" id="UserInfoDTO">
+		<id 	column="userid" property="userId" />
+		<result column="username" property="userName" />
+		<result column="usertype" property="userType" />
+		<result column="usersex" property="sex" />
+		<result column="userphone" property="phone" />
+		<result column="userpicurl" property="picUrl" />
+		<result column="orgid" property="orgId" />
+		<result column="departmentid" property="departId" />
+		<result column="pushUserId" property="pushUserId" />
+		<result column="pushChannelId" property="pushChannelId" />
+		<result column="deviceType" property="deviceType" />
+	</resultMap>
+	
+	
+
+	<!-- 查询用户登录  用户信息放入session -->
+	<select id="selectMobileUserLoginInfo" parameterType="MobileUserDTO" resultMap="MobileUserDTO" >   
+		select 
+		u.userid,u.username,
+		u.usertype,u.userlevel,u.orgid,u.departmentid,u.userpicurl from t_user u 
+		<where>
+			 1=1
+			<if test="userName != null">
+			 	and u.username = #{userName}
+    		</if>
+    		<if test="userPwd != null">
+				and u.userpwd = #{userPwd}
+    		</if>
+		</where>
+	</select>
+	
+	
+	<select id="queryContactUserInfo" parameterType="MobileUserDTO" resultMap="UserInfoDTO" >   
+		select 
+		u.userid,u.username,
+		u.usertype,u.usersex,u.userphone,u.orgid,u.departmentid,u.userpicurl from t_user u 
+		<where>
+			 1=1
+			<if test="orgId != null">
+			 	and u.orgid = #{orgId}
+    		</if>
+    		<if test="departId != null">
+				and u.departmentid = #{departId}
+    		</if>
+		</where>
+	</select>
+	
+	
+	
+<!-- 更新库中的资源 -->
+	<update id="addPushInfo" parameterType="UserInfoDTO">   
+		update t_user   
+		<set>
+   			<if test="pushUserId != null and pushUserId != '' ">pushUserId=#{pushUserId},</if>
+   			<if test="pushChannelId != null and pushChannelId != '' ">pushChannelId=#{pushChannelId},</if>
+   			<if test="deviceType != null and deviceType != '' ">deviceType=#{deviceType},</if>
+    	</set>
+    	where userId=#{userId} 
+	</update>
+	
+</mapper>

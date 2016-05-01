@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.huarong.p2p.api.mybatis.mapper.SelectMapper" >
+  <resultMap id="BaseResultMap" type="com.huarong.p2p.api.mybatis.model.Select" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="typeId" property="typeid" jdbcType="BIGINT" />
+    <result column="selectKey" property="selectkey" jdbcType="VARCHAR" />
+    <result column="selectValue" property="selectvalue" jdbcType="INTEGER" />
+    <result column="selectName" property="selectname" jdbcType="VARCHAR" />
+    <result column="deleted" property="deleted" jdbcType="INTEGER" />
+    <result column="introduce" property="introduce" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, typeId, selectKey, selectValue, selectName, deleted, introduce
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_select
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  
+  <select id="selectBySelectKey" resultMap="BaseResultMap" parameterType="java.util.Map">
+  		select 
+  		<if test="fields!=null">
+  		#{fields}
+  		</if>
+  		<if test="fields==null">
+  		<include refid="Base_Column_List" />
+  		</if>
+  		from t_select where selectKey = #{selectKey}
+  </select>
+  
+</mapper>

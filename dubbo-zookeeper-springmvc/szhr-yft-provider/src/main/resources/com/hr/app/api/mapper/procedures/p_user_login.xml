@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 函数Mapper -->
+<mapper namespace="procedureMapper">
+
+	<resultMap type="java.util.Map" id="procedureResultMap" >
+		<result  column="out_ret" jdbcType="INTEGER" property="out_ret" />
+		<result  column="out_desc" jdbcType="VARCHAR" property="out_desc"/>
+	</resultMap>
+	
+	<parameterMap type="java.util.Map" id="parameterMap">
+		<parameter property="userName" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="passWord" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="lastIP" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="out_ret" jdbcType="VARCHAR" mode="INOUT"/>
+		<parameter property="out_desc" jdbcType="VARCHAR" mode="INOUT"/>
+	</parameterMap>
+
+	<select id="userLogin" parameterMap="parameterMap" 
+		statementType="CALLABLE"  useCache="false">
+		{call sp2p.p_user_login(?, ?, ? , ? , ?)}
+	</select>
+	
+</mapper>

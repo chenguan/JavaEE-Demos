@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kangyonggan.mapper.ReplyMapper">
+    <resultMap id="BaseResultMap" type="com.kangyonggan.model.Reply">
+        <!--
+        WARNING - @mbggenerated
+        -->
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="body" property="body" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="VARCHAR"/>
+        <result column="hits" property="hits" jdbcType="BIGINT"/>
+        <result column="articleId" property="articleid" jdbcType="BIGINT"/>
+        <result column="userId" property="userid" jdbcType="BIGINT"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="createdTime" property="createdtime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+</mapper>

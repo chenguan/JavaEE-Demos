@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.huarong.p2p.api.mybatis.mapper.AdminMapper" >
+  <resultMap id="BaseResultMap" type="com.huarong.p2p.api.mybatis.model.Admin" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="userName" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="enable" property="enable" jdbcType="INTEGER" />
+    <result column="lastTime" property="lasttime" jdbcType="TIMESTAMP" />
+    <result column="lastIP" property="lastip" jdbcType="VARCHAR" />
+    <result column="roleId" property="roleid" jdbcType="BIGINT" />
+    <result column="realName" property="realname" jdbcType="VARCHAR" />
+    <result column="telphone" property="telphone" jdbcType="VARCHAR" />
+    <result column="qq" property="qq" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="isLeader" property="isleader" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="INTEGER" />
+    <result column="card" property="card" jdbcType="VARCHAR" />
+    <result column="summary" property="summary" jdbcType="VARCHAR" />
+    <result column="nativePlacePro" property="nativeplacepro" jdbcType="INTEGER" />
+    <result column="nativePlaceCity" property="nativeplacecity" jdbcType="INTEGER" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="addDate" property="adddate" jdbcType="TIMESTAMP" />
+    <result column="moneys" property="moneys" jdbcType="DECIMAL" />
+    <result column="loginErrorCount" property="loginerrorcount" jdbcType="INTEGER" />
+    <result column="isLoginLimit" property="isloginlimit" jdbcType="INTEGER" />
+    <result column="isFirstLogin" property="isfirstlogin" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.huarong.p2p.api.mybatis.model.Admin" extends="BaseResultMap" >
+    <result column="img" property="img" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, userName, password, enable, lastTime, lastIP, roleId, realName, telphone, qq, 
+    email, isLeader, sex, card, summary, nativePlacePro, nativePlaceCity, address, addDate, 
+    moneys, loginErrorCount, isLoginLimit, isFirstLogin
+  </sql>
+  <sql id="Blob_Column_List" >
+    img
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_admin
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_admin
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.huarong.p2p.api.mybatis.model.Admin" >
+    insert into t_admin (id, userName, password, 
+      enable, lastTime, lastIP, 
+      roleId, realName, telphone, 
+      qq, email, isLeader, 
+      sex, card, summary, 
+      nativePlacePro, nativePlaceCity, address, 
+      addDate, moneys, loginErrorCount, 
+      isLoginLimit, isFirstLogin, img
+      )
+    values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{enable,jdbcType=INTEGER}, #{lasttime,jdbcType=TIMESTAMP}, #{lastip,jdbcType=VARCHAR}, 
+      #{roleid,jdbcType=BIGINT}, #{realname,jdbcType=VARCHAR}, #{telphone,jdbcType=VARCHAR}, 
+      #{qq,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{isleader,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{card,jdbcType=VARCHAR}, #{summary,jdbcType=VARCHAR}, 
+      #{nativeplacepro,jdbcType=INTEGER}, #{nativeplacecity,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, 
+      #{adddate,jdbcType=TIMESTAMP}, #{moneys,jdbcType=DECIMAL}, #{loginerrorcount,jdbcType=INTEGER}, 
+      #{isloginlimit,jdbcType=INTEGER}, #{isfirstlogin,jdbcType=INTEGER}, #{img,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.huarong.p2p.api.mybatis.model.Admin" >
+    insert into t_admin
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="username != null" >
+        userName,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="enable != null" >
+        enable,
+      </if>
+      <if test="lasttime != null" >
+        lastTime,
+      </if>
+      <if test="lastip != null" >
+        lastIP,
+      </if>
+      <if test="roleid != null" >
+        roleId,
+      </if>
+      <if test="realname != null" >
+        realName,
+      </if>
+      <if test="telphone != null" >
+        telphone,
+      </if>
+      <if test="qq != null" >
+        qq,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="isleader != null" >
+        isLeader,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="card != null" >
+        card,
+      </if>
+      <if test="summary != null" >
+        summary,
+      </if>
+      <if test="nativeplacepro != null" >
+        nativePlacePro,
+      </if>
+      <if test="nativeplacecity != null" >
+        nativePlaceCity,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="adddate != null" >
+        addDate,
+      </if>
+      <if test="moneys != null" >
+        moneys,
+      </if>
+      <if test="loginerrorcount != null" >
+        loginErrorCount,
+      </if>
+      <if test="isloginlimit != null" >
+        isLoginLimit,
+      </if>
+      <if test="isfirstlogin != null" >
+        isFirstLogin,
+      </if>
+      <if test="img != null" >
+        img,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="enable != null" >
+        #{enable,jdbcType=INTEGER},
+      </if>
+      <if test="lasttime != null" >
+        #{lasttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastip != null" >
+        #{lastip,jdbcType=VARCHAR},
+      </if>
+      <if test="roleid != null" >
+        #{roleid,jdbcType=BIGINT},
+      </if>
+      <if test="realname != null" >
+        #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="telphone != null" >
+        #{telphone,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="isleader != null" >
+        #{isleader,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="card != null" >
+        #{card,jdbcType=VARCHAR},
+      </if>
+      <if test="summary != null" >
+        #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="nativeplacepro != null" >
+        #{nativeplacepro,jdbcType=INTEGER},
+      </if>
+      <if test="nativeplacecity != null" >
+        #{nativeplacecity,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="adddate != null" >
+        #{adddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="moneys != null" >
+        #{moneys,jdbcType=DECIMAL},
+      </if>
+      <if test="loginerrorcount != null" >
+        #{loginerrorcount,jdbcType=INTEGER},
+      </if>
+      <if test="isloginlimit != null" >
+        #{isloginlimit,jdbcType=INTEGER},
+      </if>
+      <if test="isfirstlogin != null" >
+        #{isfirstlogin,jdbcType=INTEGER},
+      </if>
+      <if test="img != null" >
+        #{img,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.huarong.p2p.api.mybatis.model.Admin" >
+    update t_admin
+    <set >
+      <if test="username != null" >
+        userName = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="enable != null" >
+        enable = #{enable,jdbcType=INTEGER},
+      </if>
+      <if test="lasttime != null" >
+        lastTime = #{lasttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastip != null" >
+        lastIP = #{lastip,jdbcType=VARCHAR},
+      </if>
+      <if test="roleid != null" >
+        roleId = #{roleid,jdbcType=BIGINT},
+      </if>
+      <if test="realname != null" >
+        realName = #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="telphone != null" >
+        telphone = #{telphone,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        qq = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="isleader != null" >
+        isLeader = #{isleader,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="card != null" >
+        card = #{card,jdbcType=VARCHAR},
+      </if>
+      <if test="summary != null" >
+        summary = #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="nativeplacepro != null" >
+        nativePlacePro = #{nativeplacepro,jdbcType=INTEGER},
+      </if>
+      <if test="nativeplacecity != null" >
+        nativePlaceCity = #{nativeplacecity,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="adddate != null" >
+        addDate = #{adddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="moneys != null" >
+        moneys = #{moneys,jdbcType=DECIMAL},
+      </if>
+      <if test="loginerrorcount != null" >
+        loginErrorCount = #{loginerrorcount,jdbcType=INTEGER},
+      </if>
+      <if test="isloginlimit != null" >
+        isLoginLimit = #{isloginlimit,jdbcType=INTEGER},
+      </if>
+      <if test="isfirstlogin != null" >
+        isFirstLogin = #{isfirstlogin,jdbcType=INTEGER},
+      </if>
+      <if test="img != null" >
+        img = #{img,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.huarong.p2p.api.mybatis.model.Admin" >
+    update t_admin
+    set userName = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      enable = #{enable,jdbcType=INTEGER},
+      lastTime = #{lasttime,jdbcType=TIMESTAMP},
+      lastIP = #{lastip,jdbcType=VARCHAR},
+      roleId = #{roleid,jdbcType=BIGINT},
+      realName = #{realname,jdbcType=VARCHAR},
+      telphone = #{telphone,jdbcType=VARCHAR},
+      qq = #{qq,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      isLeader = #{isleader,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      card = #{card,jdbcType=VARCHAR},
+      summary = #{summary,jdbcType=VARCHAR},
+      nativePlacePro = #{nativeplacepro,jdbcType=INTEGER},
+      nativePlaceCity = #{nativeplacecity,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR},
+      addDate = #{adddate,jdbcType=TIMESTAMP},
+      moneys = #{moneys,jdbcType=DECIMAL},
+      loginErrorCount = #{loginerrorcount,jdbcType=INTEGER},
+      isLoginLimit = #{isloginlimit,jdbcType=INTEGER},
+      isFirstLogin = #{isfirstlogin,jdbcType=INTEGER},
+      img = #{img,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.huarong.p2p.api.mybatis.model.Admin" >
+    update t_admin
+    set userName = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      enable = #{enable,jdbcType=INTEGER},
+      lastTime = #{lasttime,jdbcType=TIMESTAMP},
+      lastIP = #{lastip,jdbcType=VARCHAR},
+      roleId = #{roleid,jdbcType=BIGINT},
+      realName = #{realname,jdbcType=VARCHAR},
+      telphone = #{telphone,jdbcType=VARCHAR},
+      qq = #{qq,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      isLeader = #{isleader,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      card = #{card,jdbcType=VARCHAR},
+      summary = #{summary,jdbcType=VARCHAR},
+      nativePlacePro = #{nativeplacepro,jdbcType=INTEGER},
+      nativePlaceCity = #{nativeplacecity,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR},
+      addDate = #{adddate,jdbcType=TIMESTAMP},
+      moneys = #{moneys,jdbcType=DECIMAL},
+      loginErrorCount = #{loginerrorcount,jdbcType=INTEGER},
+      isLoginLimit = #{isloginlimit,jdbcType=INTEGER},
+      isFirstLogin = #{isfirstlogin,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

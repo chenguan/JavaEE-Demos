@@ -1,0 +1,1 @@
+一个简单的SpringMVC应用,IDEA开发,Maven管理,Mybatis Mysql数据库.

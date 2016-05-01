@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.huarong.p2p.api.mybatis.mapper.SendSmsMapper" >
+  <resultMap id="BaseResultMap" type="com.huarong.p2p.api.mybatis.model.SendSms" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="sendTime" property="sendtime" jdbcType="TIMESTAMP" />
+    <result column="splitId" property="splitid" jdbcType="VARCHAR" />
+    <result column="splitPhone" property="splitphone" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, content, sendTime, splitId, splitPhone, status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_sendsms
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_sendsms
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.huarong.p2p.api.mybatis.model.SendSms" >
+    insert into t_sendsms (id, content, sendTime, 
+      splitId, splitPhone, status
+      )
+    values (#{id,jdbcType=BIGINT}, #{content,jdbcType=VARCHAR}, #{sendtime,jdbcType=TIMESTAMP}, 
+      #{splitid,jdbcType=VARCHAR}, #{splitphone,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.huarong.p2p.api.mybatis.model.SendSms" >
+    insert into t_sendsms
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="sendtime != null" >
+        sendTime,
+      </if>
+      <if test="splitid != null" >
+        splitId,
+      </if>
+      <if test="splitphone != null" >
+        splitPhone,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="sendtime != null" >
+        #{sendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="splitid != null" >
+        #{splitid,jdbcType=VARCHAR},
+      </if>
+      <if test="splitphone != null" >
+        #{splitphone,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.huarong.p2p.api.mybatis.model.SendSms" >
+    update t_sendsms
+    <set >
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="sendtime != null" >
+        sendTime = #{sendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="splitid != null" >
+        splitId = #{splitid,jdbcType=VARCHAR},
+      </if>
+      <if test="splitphone != null" >
+        splitPhone = #{splitphone,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.huarong.p2p.api.mybatis.model.SendSms" >
+    update t_sendsms
+    set content = #{content,jdbcType=VARCHAR},
+      sendTime = #{sendtime,jdbcType=TIMESTAMP},
+      splitId = #{splitid,jdbcType=VARCHAR},
+      splitPhone = #{splitphone,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  
+    <select id="checkSendSmsCount" resultType="java.lang.Integer"  parameterType="java.util.Map">
+  		SELECT COUNT(id) FROM t_sendsms t WHERE t.sendtime&gt;=#{sendTime,jdbcType=TIMESTAMP} AND t.sendtime&lt;=#{sendTime,jdbcType=TIMESTAMP} AND t.splitPhone LIKE '%#{splitPhone}%'
+  </select>
+  
+  <insert id="insertSendSms"   parameterType="com.huarong.p2p.api.mybatis.model.SendSms">
+  		insert into t_sendsms(content,sendTime,splitId,splitPhone,status) 
+  		values (#{content,jdbcType=VARCHAR},#{sendTime,jdbcType=TIMESTAMP},#{splitId,jdbcType=VARCHAR},#{splitPhone,jdbcType=VARCHAR},#{status,jdbcType=INTEGER})
+  </insert>
+  
+</mapper>

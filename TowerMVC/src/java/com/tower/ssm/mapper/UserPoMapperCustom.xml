@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tower.ssm.mapper.UserPoMapperCustom" >
+
+   <!-- 定义商品查询的sql片段，就是商品查询条件 -->
+   <sql id="query_items_where">
+   	<!-- 使用动态sql，通过if判断，满足条件进行sql拼接 -->
+   	<!-- 用户查询条件通过ItemsQueryVo包装对象 中itemsCustom属性传递 -->
+   		<if test="userCustom!=null">
+   			<if test="userCustom.username!=null and userCustom.username!=''">
+   				user_info.username LIKE '%${userCustom.username}%'
+   			</if>
+   			<if test="userCustom.password!=null and userCustom.password!=''">
+  				and user_info.password !='%${userCustom.password}%'
+  			</if>
+   		</if>
+   </sql>
+  	
+  	<!-- 用户列表查询 -->
+  	<!-- parameterType传入包装对象(包装了查询条件)
+  		resultType建议使用扩展对象
+  	 -->
+  	<select id="findUsersList" parameterType="com.tower.ssm.po.UserVo"
+  		 resultType="com.tower.ssm.po.UserCustom">
+  		SELECT user_info.* FROM user_info  
+  		<where>
+  			<include refid="query_items_where"></include>
+  		</where>
+  	</select>
+  	
+</mapper>

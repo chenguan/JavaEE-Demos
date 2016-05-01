@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huarong.p2p.api.mybatis.mapper.PersonMapper">
+  <resultMap id="BaseResultMap" type="com.huarong.p2p.api.mybatis.model.Person">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="realName" jdbcType="VARCHAR" property="realname" />
+    <result column="cellPhone" jdbcType="VARCHAR" property="cellphone" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="birthday" jdbcType="DATE" property="birthday" />
+    <result column="highestEdu" jdbcType="VARCHAR" property="highestedu" />
+    <result column="eduStartDay" jdbcType="DATE" property="edustartday" />
+    <result column="school" jdbcType="VARCHAR" property="school" />
+    <result column="maritalStatus" jdbcType="VARCHAR" property="maritalstatus" />
+    <result column="hasChild" jdbcType="VARCHAR" property="haschild" />
+    <result column="hasHourse" jdbcType="VARCHAR" property="hashourse" />
+    <result column="hasHousrseLoan" jdbcType="VARCHAR" property="hashousrseloan" />
+    <result column="hasCar" jdbcType="VARCHAR" property="hascar" />
+    <result column="hasCarLoan" jdbcType="VARCHAR" property="hascarloan" />
+    <result column="nativePlacePro" jdbcType="INTEGER" property="nativeplacepro" />
+    <result column="nativePlaceCity" jdbcType="INTEGER" property="nativeplacecity" />
+    <result column="registedPlacePro" jdbcType="INTEGER" property="registedplacepro" />
+    <result column="registedPlaceCity" jdbcType="INTEGER" property="registedplacecity" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="telephone" jdbcType="VARCHAR" property="telephone" />
+    <result column="userId" jdbcType="BIGINT" property="userid" />
+    <result column="personalHead" jdbcType="VARCHAR" property="personalhead" />
+    <result column="idNo" jdbcType="VARCHAR" property="idno" />
+    <result column="auditStatus" jdbcType="INTEGER" property="auditstatus" />
+    <result column="flag" jdbcType="INTEGER" property="flag" />
+    <result column="qq" jdbcType="VARCHAR" property="qq" />
+    <result column="authCardName" jdbcType="INTEGER" property="authcardname" />
+    <result column="defaultBcard" jdbcType="INTEGER" property="defaultbcard" />
+    <result column="source" jdbcType="VARCHAR" property="source" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, realName, cellPhone, sex, birthday, highestEdu, eduStartDay, school, maritalStatus, 
+    hasChild, hasHourse, hasHousrseLoan, hasCar, hasCarLoan, nativePlacePro, nativePlaceCity, 
+    registedPlacePro, registedPlaceCity, address, telephone, userId, personalHead, idNo, 
+    auditStatus, flag, qq, authCardName, defaultBcard, source
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_person
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+</mapper>

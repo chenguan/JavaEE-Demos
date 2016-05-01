@@ -1,0 +1,9 @@
+[submodule "goshop"]
+	path = goshop
+	url = git@github.com:yew1eb/goshop.git
+[submodule "go"]
+	path = go
+	url = git@github.com:yew1eb/go.git
+[submodule "PBlog"]
+	path = PBlog
+	url = git@github.com:yew1eb/PBlog.git

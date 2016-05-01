@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-3.2.xsd
+	http://www.springframework.org/schema/mvc 
+    http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd">
+
+	<context:property-placeholder
+		ignore-unresolvable="true" ignore-resource-not-found="true"
+		system-properties-mode="NEVER"
+		location="classpath:META-INF/conf/application.properties" />
+	<!-- Linux 版本的配置，务必不能删除 -->
+	<context:property-placeholder
+		ignore-unresolvable="true" ignore-resource-not-found="true"
+		system-properties-mode="NEVER"
+		location="classpath:META-INF/conf/dubbo.properties" />
+		
+		
+	 <!-- 分模块服务器访问URL配置 -->
+	<context:component-scan base-package="com.tianxiaxinyong.web">
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+	
+	<!-- <mvc:view-controller path="/" view-name="forward:/index" /> -->
+	
+	<bean id="shiroAuthorizingRealm" class="com.tianxiaxinyong.web.security.shrio.ShiroAuthorizingRealm"></bean>
+	
+	<bean id="securityManager"
+        class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="shiroAuthorizingRealm" />
+    </bean>
+	<bean id="shiroFilter"
+	 	class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<property name="securityManager" ref="securityManager" />
+		<property name="loginUrl" value="/" />
+		<property name="successUrl" value="/index" />
+		<property name="unauthorizedUrl" value="/error" />
+		<property name="filterChainDefinitions">
+		  <value>
+		  /login = anon
+		  /doLogin = anon
+		  /index = anon
+		  /** = authc
+		  </value>
+		</property>
+	</bean>
+	
+	<import resource="applicationContext-dubbo.xml" />
+	
+	
+</beans>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tianxiaxinyong.mapper.MemberMapper" >
+  <resultMap id="BaseResultMap" type="com.tianxiaxinyong.enterprise.member.domain.Member" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="email_status" property="emailStatus" jdbcType="INTEGER" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="company_name" property="companyName" jdbcType="VARCHAR" />
+    <result column="user_status" property="userStatus" jdbcType="INTEGER" />
+    <result column="login_failtimes" property="loginFailtimes" jdbcType="INTEGER" />
+    <result column="lock_time" property="locktime" jdbcType="TIMESTAMP" />
+    <result column="last_logintime" property="lastLogintime" jdbcType="TIMESTAMP" />
+    <result column="last_loginip" property="lastLoginip" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, username, password, nickname, email, email_status, mobile, company_name, user_status, 
+    last_logintime,login_failtimes,lock_time, last_loginip, create_time, update_time
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from member
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="findMemberByMemberName" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	select 
+    <include refid="Base_Column_List" />
+    from member
+    where username = #{username,jdbcType=VARCHAR}	
+  </select>
+  
+  <!-- 主键删除 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from member
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  
+  <insert id="insert" parameterType="com.tianxiaxinyong.enterprise.member.domain.Member" >
+    insert into member (id, username, password, 
+      nickname, email, email_status, 
+      mobile, company_name, user_status, 
+      last_logintime, last_loginip,login_failtimes,lock_time, create_time, 
+      update_time)
+    values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{nickname,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{emailStatus,jdbcType=INTEGER}, 
+      #{mobile,jdbcType=VARCHAR}, #{companyName,jdbcType=VARCHAR}, #{userStatus,jdbcType=INTEGER}, 
+      #{lastLogintime,jdbcType=TIMESTAMP}, #{lastLoginip,jdbcType=VARCHAR},#{loginFailtimes,jdbcType=INTEGER},
+      #{locktime,jdbcType=TIMESTAMP}, now(), 
+     now())
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.tianxiaxinyong.enterprise.member.domain.Member" >
+    update member
+    <set >
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="emailStatus != null" >
+        email_status = #{emailStatus,jdbcType=INTEGER},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null" >
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="userStatus != null" >
+        user_status = #{userStatus,jdbcType=INTEGER},
+      </if>
+      <if test="lastLogintime != null" >
+        last_logintime = #{lastLogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginFailtimes != null">
+     	 login_failtimes = #{loginFailtimes,jdbcType=INTEGER},
+      </if>
+      <if test="locktime != null">
+      	lock_time = #{locktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginip != null" >
+        last_loginip = #{lastLoginip,jdbcType=VARCHAR},
+      </if>
+        update_time = now(),
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

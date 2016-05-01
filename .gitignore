@@ -1,2 +1,17 @@
+<<<<<<< HEAD
 .DS_Store
 .idea
+=======
+.classpath
+.project
+/.metadata
+/.settings
+/build
+/bin
+/dist
+/.idea
+/PBlog.iml
+/target
+/properties
+/node_modules
+>>>>>>> 4cff63fb4efe2b85c50654e40ec4535cb54c6bab

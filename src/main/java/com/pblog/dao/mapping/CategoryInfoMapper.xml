@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pblog.dao.CategoryInfoMapper" >
+
+  <select id="findBySlug" resultType="com.pblog.domain.CategoryInfo" parameterType="java.lang.Long">
+    select * from category_info where slug = #{slug, jdbcType=BIGINT}
+  </select>
+
+  <select id="findAll" resultType="com.pblog.domain.CategoryInfo">
+    select * from category_info;
+  </select>
+</mapper>

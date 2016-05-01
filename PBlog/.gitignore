@@ -1,12 +1,3 @@
-.classpath
-.project
-/.metadata
-/.settings
-/build
-/bin
-/dist
-/.idea
-/PBlog.iml
-/target
-/properties
-/node_modules
+.idea
+PBlog.iml
+target

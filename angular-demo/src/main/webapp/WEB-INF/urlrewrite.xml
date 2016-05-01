@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE urlrewrite
+        PUBLIC "-//tuckey.org//DTD UrlRewrite 4.0//EN"
+        "http://www.tuckey.org/res/dtds/urlrewrite4.0.dtd">
+
+<urlrewrite>
+
+    <rule>
+        <from>^/$</from>
+        <to>/user/index</to>
+    </rule>
+    <rule>
+        <from>^/index$</from>
+        <to>/user/index</to>
+    </rule>
+    <rule>
+        <from>^/error/404$</from>
+        <to>/error/404</to>
+    </rule>
+
+    <rule>
+        <from>^/error/500$</from>
+        <to>/error/500</to>
+    </rule>
+    <rule>
+        <from>^/home$</from>
+        <to>/user/mainPage</to>
+    </rule>
+    <rule>
+        <from>^/userList$</from>
+        <to>/user/mainPage</to>
+    </rule>
+</urlrewrite>

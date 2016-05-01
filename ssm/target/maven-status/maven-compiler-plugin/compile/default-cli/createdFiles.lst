@@ -1,7 +1,0 @@
-com/sankuai/common/PageParam.class
-com/sankuai/controller/TestController.class
-com/sankuai/mapper/UserMapper.class
-com/sankuai/aspect/TestAspect.class
-com/sankuai/service/UserService.class
-com/sankuai/filter/ParameterFilter.class
-com/sankuai/bean/User.class

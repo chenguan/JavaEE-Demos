@@ -1,4 +1,7 @@
-create table ec_group(
+CREATE DATABASE IF NOT EXISTS `ssm-cms`;
+USE `ssm-cms`;
+
+create table IF NOT EXISTS ec_group(
   id int primary key auto_increment,
   name varchar(100) not null,
   priority int not null default '10',
@@ -9,7 +12,7 @@ create table ec_group(
   needCheck tinyint(1) not null default '1',
   regDef tinyint(1) not null default '1'
 );
-create table ec_user(
+create table IF NOT EXISTS ec_user(
   id int primary key auto_increment,
   group_id int not null,
   username varchar(100) not null,
@@ -29,7 +32,7 @@ create table ec_user(
   disabled tinyint(1) not null default '0',
   foreign key(group_id) references ec_group(id)
 );
-create table ec_user_ext(
+create table IF NOT EXISTS ec_user_ext(
   id int primary key auto_increment,
   uid int,
   realname varchar(100),
@@ -45,14 +48,14 @@ create table ec_user_ext(
   userSignature varchar(255),
   foreign key(uid) references ec_user(id)
 );
-create table ec_role(
+create table IF NOT EXISTS ec_role(
   id int primary key auto_increment,
   name varchar(100),
   priority int not null default '1',
   m_super tinyint(1) not null default '0',
   siteId int(11)
 );
-create table ec_log(
+create table IF NOT EXISTS ec_log(
   id int primary key auto_increment,
   category int not null default '3',
   time datetime,
@@ -62,7 +65,7 @@ create table ec_log(
   content varchar(100),
   username varchar(100)
 );
-CREATE TABLE ec_message(
+CREATE TABLE IF NOT EXISTS ec_message(
 	msgId INT PRIMARY KEY AUTO_INCREMENT,
 	msgTitle VARCHAR(100),
 	msgContent VARCHAR(255),
@@ -75,7 +78,7 @@ CREATE TABLE ec_message(
 	FOREIGN KEY(msgSendUserId) REFERENCES ec_user(id),
 	FOREIGN KEY(msgReceiverUserId) REFERENCES ec_user(id)
 );
-CREATE TABLE ec_message_receiver(
+CREATE TABLE IF NOT EXISTS ec_message_receiver(
 	receiverId INT PRIMARY KEY AUTO_INCREMENT,
 	msgTitle VARCHAR(100),
 	msgContent VARCHAR(255),

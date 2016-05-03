@@ -14,7 +14,7 @@ public class TextLog {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext-common.xml");
+		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		ls = (CmsLogService)context.getBean("cmsLogServiceImpl");
 	}
 

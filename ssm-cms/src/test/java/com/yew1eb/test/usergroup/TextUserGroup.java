@@ -17,7 +17,7 @@ public class TextUserGroup {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext-common.xml");
+		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		cs = (CmsUserGroupService)context.getBean("cmsUserGroupServiceImpl");
 	}
 

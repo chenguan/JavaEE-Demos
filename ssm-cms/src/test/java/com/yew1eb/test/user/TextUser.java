@@ -16,7 +16,7 @@ public class TextUser {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext-common.xml");
+		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		cs = (CmsUserService)context.getBean("cmsUserServiceImpl");
 	}
 

@@ -1,7 +1,0 @@
-*.class
-*.iml
-.DS_Store
-rebel.xml
-*/target
-/.idea
-/log

@@ -15,6 +15,7 @@
 
     <modules>
         <module>servlet-todo</module>
+        <module>servlet-h2</module>
         <module>servlet-bookstore</module>
     </modules>
     

@@ -2,7 +2,7 @@
 <configuration scan="true" scanPeriod="30 seconds">
 	<!-- <jmxConfigurator /> -->
 	<!--定义日志文件的存储地址 勿在 LogBack 的配置中使用相对路径 -->
-	<property name="LOG_HOME" value="e:/tmp" />
+	<property name="LOG_HOME" value="tmp" />
 	<!-- 控制台日志输出 -->
 	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
 		<layout class="ch.qos.logback.classic.PatternLayout">

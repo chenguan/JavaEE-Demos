@@ -1,5 +1,6 @@
 package com.mkyong.dao;
 
+import com.yew1eb.dao.UserDao;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -9,7 +10,7 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
-import com.mkyong.model.User;
+import com.yew1eb.domain.User;
 
 public class UserDaoTest {
 
@@ -22,8 +23,8 @@ public class UserDaoTest {
         //db = new EmbeddedDatabaseBuilder().addDefaultScripts().build();
     	db = new EmbeddedDatabaseBuilder()
     		.setType(EmbeddedDatabaseType.H2)
-    		.addScript("db/sql/create-db.sql")
-    		.addScript("db/sql/insert-data.sql")
+    		.addScript("db/schema.sql")
+    		.addScript("db/test-data.sql")
     		.build();
     }
 

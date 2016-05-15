@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-4.1.xsd http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd"
+       default-lazy-init="true">
+
+    <jdbc:initialize-database data-source="h2DataSource" ignore-failures="DROPS" >
+        <jdbc:script location="classpath:h2/INIT_TABLE.sql"/>
+        <jdbc:script location="classpath:h2/INIT_DATA.sql"/>
+    </jdbc:initialize-database>
+    <bean id="h2DataSource" class="org.h2.jdbcx.JdbcDataSource">
+        <property name="URL" value="jdbc:h2:mem;MODE=MySQL;DB_CLOSE_DELAY=-1"/>
+        <property name="user" value="admin"/>
+        <property name="password" value="admin"/>
+    </bean>
+    <!--
+         <jdbc:embedded-database id="dataSource" type="H2">
+        <jdbc:script location="classpath:H2_TYPE.sql"/>
+        <jdbc:script location="classpath:INIT_TABLE.sql"/>
+        <jdbc:script location="classpath:INIT_DATA.sql"/>
+    </jdbc:embedded-database>
+    -->
+    <!--
+    <bean id="h2DataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="org.h2.Driver" />
+        <property name="url" value="jdbc:h2:~/.h2/test" />
+        <property name="username" value="admin" />
+        <property name="password" value="admin" />
+    </bean>
+    -->
+    <bean id="h2SqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="h2DataSource"/>
+        <!-- 配置扫描Domain的包路径 -->
+        <property name="typeAliasesPackage" value="com.yew1eb.domain"/>
+        <!-- 配置扫描Mapper XML的位置 -->
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+        <!-- 配置mybatis配置文件的位置 -->
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+    </bean>
+    <!-- 配置扫描Mapper接口的包路径 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="h2SqlSessionFactory" />
+        <property name="basePackage" value="com.yew1eb.dao"/>
+    </bean>
+
+    <bean id="TransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="h2DataSource"/>
+    </bean>
+    <bean id="TransactionTemplate" class="org.springframework.transaction.support.TransactionTemplate">
+        <property name="transactionManager" ref="TransactionManager"/>
+    </bean>
+
+</beans>

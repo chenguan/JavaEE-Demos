@@ -13,6 +13,7 @@
 	<properties>
 			<jdk.version>1.7</jdk.version>
 			<spring.version>4.1.6.RELEASE</spring.version>
+			<mybatis.version>3.4.0</mybatis.version>
 			<hsqldb.version>2.3.2</hsqldb.version>
 			<h2.version>1.4.191</h2.version>
 			<derby.version>10.11.1.1</derby.version>
@@ -70,6 +71,11 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
 			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>${mybatis.version}</version>
 		</dependency>
 
 		<!-- HyperSQL DB -->
@@ -153,17 +159,10 @@
 				</configuration>
 			</plugin>
 
-			<!-- configure Eclipse workspace -->
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-eclipse-plugin</artifactId>
-				<version>2.9</version>
-				<configuration>
-					<downloadSources>true</downloadSources>
-					<downloadJavadocs>true</downloadJavadocs>
-					<wtpversion>2.0</wtpversion>
-					<wtpContextName>spring-mvc-db</wtpContextName>
-				</configuration>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>tomcat-maven-plugin</artifactId>
+				<version>1.1</version>
 			</plugin>
 		</plugins>
 	</build>

@@ -1,0 +1,6 @@
+
+CREATE TABLE USER(
+    id int(11) NOT NULL AUTO_INCREMENT  PRIMARY KEY,
+    name VARCHAR(100),
+    sex VARCHAR(4))
+);

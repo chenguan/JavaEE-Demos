@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.github.yew1eb</groupId>
-	<artifactId>h2-demos</artifactId>
+	<artifactId>servlet-h2</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>h2-demos</name>
+	<name>servlet-h2</name>
 	<url>http://www.yew1eb.com</url>
 
 	<properties>

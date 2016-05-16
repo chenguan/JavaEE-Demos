@@ -6,6 +6,10 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>javax</groupId>
@@ -49,7 +53,7 @@
                     <artifactId>tomcat7-maven-plugin</artifactId>
                     <version>2.2</version>
                     <configuration>
-                        <path>/</path>
+                        <path>/servlet-todo</path>
                         <contextReloadable>true</contextReloadable>
                     </configuration>
                 </plugin>

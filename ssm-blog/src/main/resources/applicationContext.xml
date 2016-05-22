@@ -28,6 +28,7 @@
 		<property name="dataSource" ref="dataSource" />
 		<!-- 自动扫描mappers.xml文件 -->
 		<property name="mapperLocations" value="classpath:mappers/*.xml"></property>
+
 		<!-- mybatis配置文件 -->
 		<property name="configLocation" value="classpath:mybatis-config.xml"></property>
 	</bean>
@@ -46,7 +47,7 @@
 	
 	<!-- 自定义Realm -->
 	<bean id="myRealm" class="com.yew1eb.realm.MyRealm"/>
-	
+
 	<!-- 安全管理器 -->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">  
   	  <property name="realm" ref="myRealm"/>  

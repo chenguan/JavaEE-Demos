@@ -48,7 +48,7 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 	
-	<listener>  
+	<listener>
         <listener-class>com.yew1eb.service.impl.InitComponent</listener-class>
     </listener> 
 	

@@ -74,5 +74,5 @@
 		</property>
 	</bean>
 	<context:annotation-config/>
-	<import resource="jeecms/jeecms-servlet-front-action.xml"/>
+	<import resource="classpath:jeecms-servlet-front-action.xml"/>
 </beans>

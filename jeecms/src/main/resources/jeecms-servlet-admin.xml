@@ -23,7 +23,7 @@
 	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
 			<list>
-				<value>/WEB-INF/config/firewall.properties</value>
+				<value>classpath:firewall.properties</value>
 			</list>
 		</property>
 	</bean>
@@ -116,5 +116,5 @@
 	<context:annotation-config/>
 	
 	<!--包含action-->
-	<import resource="jeecms/jeecms-servlet-admin-action.xml"/>
+	<import resource="classpath:jeecms-servlet-admin-action.xml"/>
 </beans>

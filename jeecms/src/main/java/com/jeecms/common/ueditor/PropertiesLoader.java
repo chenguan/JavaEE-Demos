@@ -30,7 +30,7 @@ public class PropertiesLoader {
 	private static final Logger logger = LoggerFactory
 			.getLogger(PropertiesLoader.class);
 	private static final String DEFAULT_FILENAME = "default.properties";
-	private static final String LOCAL_PROPERTIES = "/fckeditor.properties";
+	private static final String LOCAL_PROPERTIES = "/src/main/resources/fckeditor.properties";
 	private static Properties properties = new Properties();
 
 	static {

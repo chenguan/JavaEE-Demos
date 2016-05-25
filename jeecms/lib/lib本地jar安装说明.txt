@@ -1,0 +1,8 @@
+
+mvn install:install-file -DgroupId=org.wltea.analyzer -DartifactId=IKAnalyzer -Dversion=2012FF_u6 -Dpackaging=jar -Dfile=IKAnalyzer2012_u6.jar
+
+
+mvn install:install-file -DgroupId=org.ourfuture.mem -DartifactId=memcachedclient -Dversion=1.0 -Dpackaging=jar -Dfile=memcachedclient-2.0.1.jar
+
+
+mvn install:install-file -DgroupId=com.ckfinder -DartifactId=apache-ant-zip -Dversion=2.3 -Dpackaging=jar -Dfile=apache-ant-zip-2.3.jar

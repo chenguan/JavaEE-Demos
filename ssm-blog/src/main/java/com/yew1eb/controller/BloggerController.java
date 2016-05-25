@@ -36,13 +36,15 @@ public class BloggerController {
 	public String login(Blogger blogger,HttpServletRequest request){
 		Subject subject=SecurityUtils.getSubject();
 		UsernamePasswordToken token=new UsernamePasswordToken(blogger.getUserName(), CryptographyUtil.md5(blogger.getPassword(), "java1234"));
+		System.out.println(CryptographyUtil.md5(blogger.getPassword(), "java1234"));
 		try{
-			subject.login(token); // ��¼��֤
+			subject.login(token);
 			return "redirect:/admin/main.jsp";
 		}catch(Exception e){
 			e.printStackTrace();
 			request.setAttribute("blogger", blogger);
 			request.setAttribute("errorInfo", "�û������������");
+			//return "redirect:/admin/main.jsp";
 			return "login";
 		}
 	}

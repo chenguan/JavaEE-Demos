@@ -5,3 +5,6 @@
 .DS_Store
 /target
 /shishuocms.properties
+.idea
+target
+*.iml

@@ -20,6 +20,9 @@ QQ群：7343505 <a target="_blank" href="http://shang.qq.com/wpa/qunwpa?idkey=83
 6. 创建/sql/install.sql数据库
 7. 部署中可能还会碰到很多问题，请加入QQ群：7343505
 
+
+mvn install:install-file -Dfile=../lib/UserAgentUtils-1.13.jar -DgroupId=bitwalker -DartifactId=UserAgentUtils -Dversion=1.13 -Dpackaging=jar
+
 ## 部署到线上（生产）
 1. 复制 /src/main/resources/shishuocms.properties 到 /
 2. 修改 shishuocms.properties 里的数据库链接、用户名和密码为生产环境的值

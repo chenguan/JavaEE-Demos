@@ -72,7 +72,8 @@ public class ExceptionAdvice {
 		logger.error("参数验证失败", e);
 		BindingResult result = e.getBindingResult();
 		StringBuffer sb = new StringBuffer();
-		for (ObjectError error : result.getAllErrors()) {
+		for (Object err : result.getAllErrors()) {
+			ObjectError error = (ObjectError) err;
 			String field = error.getCode();
 			String code = error.getDefaultMessage();
 			String message = String.format("%s:%s", field, code);

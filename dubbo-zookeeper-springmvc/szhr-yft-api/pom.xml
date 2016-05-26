@@ -45,11 +45,13 @@
 		</dependency>
 		<!-- 晓风 -->
 		<!-- xiaofeng shovesoft.jar -->
+		<!--
 		<dependency>
 			<groupId>xiaofeng</groupId>
 			<artifactId>shovesoft</artifactId>
 			<version>1.0</version>
 		</dependency>
+		-->
 		<!-- spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>

@@ -17,10 +17,6 @@
 	
 	<properties>
 		<!-- for maven compiler plugin -->
-		<maven_compiler_plugin_version>2.3.2</maven_compiler_plugin_version>
-		<java_source_version>1.7</java_source_version>
-		<java_target_version>1.7</java_target_version>
-		<file_encoding>UTF-8</file_encoding>
 		<maven_source_plugin_version>2.1.1</maven_source_plugin_version>
 		<maven_jar_plugin_version>2.3.2</maven_jar_plugin_version>
 		<maven_war_plugin_version>2.1.1</maven_war_plugin_version>
@@ -29,7 +25,7 @@
         <maven-surefire-plugin_version>2.17</maven-surefire-plugin_version>
 		
 		<!-- jar -->
-		<dubbo_version>2.8.4</dubbo_version>
+		<dubbo_version>2.5.2</dubbo_version>
 		<servlet_version>3.1.0</servlet_version>
 		<validation_version>1.0.0.GA</validation_version>
 		<javax_ws_rs_version>2.0</javax_ws_rs_version>
@@ -118,15 +114,12 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>${maven_compiler_plugin_version}</version>
+				<version>2.5.1</version>
 				<configuration>
 					<fork>true</fork>
-					<source>${java_source_version}</source>
-					<target>${java_target_version}</target>
-					<encoding>${file_encoding}</encoding>
-					<compilerArgs>
-						<arg>-XX:MaxPermSize=512M</arg>
-					</compilerArgs>
+					<source>1.7</source>
+					<target>1.7</target>
+					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
 		</plugins>

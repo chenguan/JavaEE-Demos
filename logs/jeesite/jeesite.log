@@ -1,0 +1,2 @@
+2016-05-26 00:01:33,404 [Thread-3] DEBUG [com.thinkgem.jeesite.common.utils.SpringContextHolder] - 清除SpringContextHolder中的ApplicationContext:Root WebApplicationContext: startup date [Thu May 26 00:00:19 CST 2016]; root of context hierarchy
+2016-05-26 00:01:33,449 [Thread-3] WARN  [org.dozer.config.GlobalSettings] - Dozer configuration file not found: dozer.properties.  Using defaults for all Dozer global properties.

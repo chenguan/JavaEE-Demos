@@ -3,11 +3,7 @@
 <configuration>
     <!-- 配置别名 -->
     <typeAliases>
-        <typeAlias alias="User" type="com.sankuai.bean.User" />
+        <package name="com.yew1eb.domain"></package>
     </typeAliases>
 
-        <!-- 指定映射文件 -->
-        <mappers>
-            <mapper resource="mapper/userMapping.xml" />
-        </mappers>
 </configuration>

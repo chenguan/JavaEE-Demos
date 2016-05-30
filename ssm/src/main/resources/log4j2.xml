@@ -1,35 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration>
-    <Properties>
-        <Property name="LOG_DIR">/Users/yew1eb/</Property>
-        <Property name="PATTERN">[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%level] %c{1} - %msg%n</Property>
-    </Properties>
-    <Appenders>
-        <Console name="Console" target="SYSTEM_OUT"> <!-- 定义类型为Console的Appender -->
-            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%level] %c{1} - %msg%n"/> <!-- 定义类型为Pattern的Layout -->
-        </Console>
-        <RollingRandomAccessFile name="File" fileName="${LOG_DIR}/file.log" filePattern="${LOG_DIR}/file-%d{yyyy-MM-dd}.log.gz">
-            <PatternLayout pattern="${PATTERN}" />
-            <Policies>
-                <TimeBasedTriggeringPolicy interval="1"/>
-            </Policies>
-        </RollingRandomAccessFile>
-    </Appenders>
-    <Loggers>
-        <Root level="error">
-            <AppenderRef ref="Console"/>
-        </Root>
-        <Logger name="com.sankuai.filter.ParameterFilter" level="info" additivity="false">
-            <AppenderRef ref="File"/>
-            <AppenderRef ref="Console"/>
-        </Logger>
-        <Logger name="com.sankuai.aspect.TestAspect" level="info" additivity="false">
-            <AppenderRef ref="File"/>
-            <AppenderRef ref="Console"/>
-        </Logger>
-    </Loggers>
-</Configuration>
+<configuration>
+    <properties>
+        <property name="LOG_HOME">/Users/yew1eb/logs/</property>
+        <property name="SERVER_NAME">ssm</property>
+        <property name="PATTERN">[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%level] %c{1} - %msg%n</property>
+    </properties>
 
-<!--
-Appenders是负责将日志事件发送到目的地的组件。ConsoleAppender将日志事件输出到控制台上，RollingRandomAccessFileAppender可以根据我们配置的TriggeringPolicy和RolloverStrategy决定何时以何种方式滚动文件(rolling file)，其内部采用ByteBuffer+RandomAccessFile的方式，大大提高了写入文件的效率。在上述示例中，名为ErrorAppender的RollingRandomAccessFile，其文件名为“/opt/logs/gct/log4j2-web-test/error.log”，Rollover Strategies通过filePattern配置为“/opt/logs/gct/log4j2-web-test/error-%d{yyyy-MM-dd}.log.gz”，其Triggering Policy为TimeBasedTriggeringPolicy，表明每天滚动文件一次：先压缩文件并保存为“error-2015-12-01.log.gz”，再生成新的文件“error.log”。PatternLayout是通过string定义pattern，其pattern类似于C函数的printf函数。
--->
+    <appenders>
+        <!-- 定义控制台输出 -->
+        <Console name="Console" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread][%file:%line] - %msg%n"/>
+        </Console>
+        <!-- 输出到文件 -->
+        <RollingRandomAccessFile name="LogFile" fileName="${LOG_HOME}/${SERVER_NAME}"
+                                 filePattern="${LOG_DIR}/file-%d{yyyy-MM-dd}.log.gz">
+            <patternLayout pattern="${PATTERN}"/>
+            <policies>
+                <TimeBasedTriggeringPolicy interval="1"/>
+            </policies>
+        </RollingRandomAccessFile>
+    </appenders>
+
+    <loggers>
+        <!-- Root Logger -->
+        <root level="DEBUG">
+            <appender-ref ref="Console"/>
+            <appender-ref ref="LogFile"/>
+        </root>
+    </loggers>
+</configuration>

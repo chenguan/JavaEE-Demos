@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yew1eb.dao.UserDao"> <!--namespace要指定为接口的类路径.-->
+
+    <select id="getByName" parameterType="string" resultType="User">
+        select username,password from user where username = #{name}
+    </select>
+
+    <select id="insert" parameterType="User">
+        insert into user(id,username,password) VALUES(null,#{name},#{email},#{passwd})
+    </select>
+
+    <select id="getRowCount" resultType="int">
+        select count(*) from user;
+    </select>
+    <select id="selectByParams" resultType="User" parameterType="map">
+        select username,password from user
+        limit ${offset}, ${size}
+    </select>
+</mapper>

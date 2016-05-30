@@ -1,0 +1,6 @@
+* [SPRING中的线程池ThreadPoolTaskExecutor](http://blog.csdn.net/qinpeng100423/article/details/9307181)
+* [java.util.concurrent介绍](http://www.cnblogs.com/happyPawpaw/p/3817196.html)
+* [ThreadPoolExecutor的应用和实现分析（上）—— 应用](http://www.molotang.com/articles/514.html)
+* [ThreadPoolExecutor的应用和实现分析（中）—— 任务处理相关源码分析](http://www.molotang.com/articles/522.html)
+* [ThreadPoolExecutor的应用和实现分析（下）—— 生命周期相关源码分析](http://www.molotang.com/articles/526.html)
+* [ThreadPoolExecutor的应用和实现分析（续）—— 任务饱和丢弃策略](http://www.molotang.com/articles/553.html)

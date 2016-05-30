@@ -1,3 +1,18 @@
 [submodule "goshop"]
 	path = goshop
 	url = git@github.com:yew1eb/goshop.git
+[submodule "expper"]
+    path = expper
+    url = git@github.com:yew1eb/expper.git
+[submodule "jeesite"]
+    path = jeesite
+    url = git@github.com:yew1eb/jeesite.git
+[submodule "weblog"]
+    path = jeesite
+    url = git@github.com:yew1eb/weblog.git
+[submodule "stackinfo"]
+    path = stackinfo
+    url = git@github.com:yew1eb/stack-info.git
+[submodule "java-china"]
+    path = java-china
+    url = git@github.com:yew1eb/java-china.git

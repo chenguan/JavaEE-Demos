@@ -5,20 +5,19 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
      http://www.springframework.org/schema/beans/spring-beans-4.1.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <context:component-scan base-package="com.sankuai" />
+    <context:component-scan base-package="com.yew1eb" />
+    <context:property-placeholder location="classpath:db.properties"/>
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driverClassName}" />
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
+        <property name="maxActive" value="20" />
+        <property name="initialSize" value="1" />
+        <property name="maxWait" value="60000" />
+        <property name="minIdle" value="1" />
 
-    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
-        <property name="driverClass" value="com.mysql.jdbc.Driver"/>
-        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/test?useUnicode=true&amp;characterEncoding=UTF-8"/>
-        <property name="user" value="root"/>
-        <property name="password" value="root"/>
-        <property name="minPoolSize" value="1"/>
-        <property name="maxPoolSize" value="20"/>
-        <property name="initialPoolSize" value="1"/>
-        <property name="maxIdleTime" value="25000"/>
-        <property name="acquireIncrement" value="1"/>
-        <property name="acquireRetryAttempts" value="30"/>
-        <property name="acquireRetryDelay" value="1000"/>
+        <property name="filters" value="stat" />
     </bean>
 
     <!-- 配置sqlSessionFactory -->
@@ -26,22 +25,23 @@
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <!--dataSource属性指定要用到的连接池-->
         <property name="dataSource" ref="dataSource" />
-        <!--configLocation属性指定mybatis的核心配置文件-->
-        <property name="configLocation" value="classpath:mybatis-config.xml" />
+        <!-- 自动扫描mappers.xml文件 -->
+        <property name="mapperLocations" value="classpath:mapper/*.xml"></property>
+        <!-- mybatis配置文件 -->
+        <property name="configLocation" value="classpath:mybatis-config.xml"></property>
     </bean>
 
-    <!-- 遍历所有com.sankuai.mapper里的接口并配置 -->
-    <!-- mapperScannerConfigurer配置了遍历所有com.sankuai.mapper里的接口产生对象 -->
+    <!-- DAO接口所在包名，Spring会自动查找其下的类 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <!--basePackage属性指定映射器接口，用于实现此接口并生成映射器对象-->
-        <property name="basePackage" value="com.sankuai.mapper"/>
+        <property name="basePackage" value="com.yew1eb.dao" />
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
     </bean>
 
-    <!-- 一个 aspect 是使用元素声明的，支持的 bean 是使用 ref 属性引用的。 -->
-    <bean id="aspect" class="com.sankuai.aspect.TestAspect"></bean>
+    <!-- 一个 aspect 是使用元素声明的，支持的 domain 是使用 ref 属性引用的。 -->
+    <bean id="aspect" class="com.yew1eb.aspect.TestAspect"></bean>
     <aop:config>
         <aop:aspect id="moocAspectAOP" ref="aspect">
-            <aop:pointcut expression="execution(* com.sankuai.service.*.*(..))" id="pointcut"/>
+            <aop:pointcut expression="execution(* com.yew1eb.service.*.*(..))" id="pointcut"/>
             <aop:before method="doBefore" pointcut-ref="pointcut"/>
         </aop:aspect>
     </aop:config>

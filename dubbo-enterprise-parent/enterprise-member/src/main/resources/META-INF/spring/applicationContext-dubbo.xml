@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<!-- 提供方应用信息，用于计算依赖关系 -->
+	<dubbo:application name="${dubbo.application.name}"/>
+
+	<!-- 使用zookeeper注册中心暴露服务地址 -->
+	<dubbo:registry protocol="zookeeper" address="${dubbo.registry.address}" />
+	<!-- 用dubbo协议在20880端口暴露服务 -->
+	<dubbo:protocol name="${dubbo.protocol.name}" port="${dubbo.protocol.port}" />
+	
+		<!-- 超时时间默认设置为10秒钟，如果特定的接口的处理时间较长，直接在service中设置超时时间 -->
+	<dubbo:provider timeout="10000" loadbalance="roundrobin" />
+	
+	<!-- <dubbo:monitor protocol="registry" /> -->
+
+	<!-- 声明需要暴露的服务接口 -->
+	<dubbo:service interface="com.tianxiaxinyong.enterprise.member.service.MemberService" ref="memberService"  />
+	
+	<dubbo:service interface="com.tianxiaxinyong.enterprise.member.service.RoleService" ref="roleService"  />
+	
+
+</beans>

@@ -8,7 +8,7 @@
     path = jeesite
     url = git@github.com:yew1eb/jeesite.git
 [submodule "weblog"]
-    path = jeesite
+    path = weblog
     url = git@github.com:yew1eb/weblog.git
 [submodule "stackinfo"]
     path = stackinfo

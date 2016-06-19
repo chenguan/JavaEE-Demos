@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.poi.hslf.model.TextPainter;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -87,11 +88,13 @@ public class LoginController extends BaseController {
 	@ResponseBody
 	public Object login()throws Exception{
 		Map<String,String> map = new HashMap<String,String>();
-		PageData pd = new PageData();
-		pd = this.getPageData();
+		PageData pd =  this.getPageData();
 		String errInfo = "";
 		String KEYDATA[] = pd.getString("KEYDATA").replaceAll("qq313596790fh", "").replaceAll("QQ978336446fh", "").split(",fh,");
-		
+		System.out.println(KEYDATA[0]+"\n"+
+				KEYDATA[1]+"\n"+
+				KEYDATA[2]+"\n"+"\n\n");
+
 		if(null != KEYDATA && KEYDATA.length == 3){
 			//shiro管理的session
 			Subject currentUser = SecurityUtils.getSubject();  
@@ -99,6 +102,7 @@ public class LoginController extends BaseController {
 			String sessionCode = (String)session.getAttribute(Const.SESSION_SECURITY_CODE);		//获取session中的验证码
 			
 			String code = KEYDATA[2];
+			code = sessionCode; // TODO 不验证验证码
 			if(null == code || "".equals(code)){
 				errInfo = "nullcode"; //验证码为空
 			}else{
@@ -109,6 +113,7 @@ public class LoginController extends BaseController {
 					String passwd = new SimpleHash("SHA-1", USERNAME, PASSWORD).toString();	//密码加密
 					pd.put("PASSWORD", passwd);
 					pd = userService.getUserByNameAndPwd(pd);
+
 					if(pd != null){
 						pd.put("LAST_LOGIN",DateUtil.getTime().toString());
 						userService.updateLastLogin(pd);
@@ -127,7 +132,8 @@ public class LoginController extends BaseController {
 						
 						//shiro加入身份验证
 						Subject subject = SecurityUtils.getSubject(); 
-					    UsernamePasswordToken token = new UsernamePasswordToken(USERNAME, PASSWORD); 
+					    UsernamePasswordToken token = new UsernamePasswordToken(USERNAME, PASSWORD);
+
 					    try { 
 					        subject.login(token); 
 					    } catch (AuthenticationException e) { 

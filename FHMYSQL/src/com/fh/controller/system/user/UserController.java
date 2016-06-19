@@ -12,6 +12,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fh.util.*;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.session.Session;
@@ -32,17 +33,6 @@ import com.fh.entity.system.Role;
 import com.fh.service.system.menu.MenuService;
 import com.fh.service.system.role.RoleService;
 import com.fh.service.system.user.UserService;
-import com.fh.util.AppUtil;
-import com.fh.util.Const;
-import com.fh.util.FileDownload;
-import com.fh.util.FileUpload;
-import com.fh.util.GetPinyin;
-import com.fh.util.Jurisdiction;
-import com.fh.util.ObjectExcelRead;
-import com.fh.util.PageData;
-import com.fh.util.ObjectExcelView;
-import com.fh.util.PathUtil;
-import com.fh.util.Tools;
 
 /** 
  * 类名称：UserController

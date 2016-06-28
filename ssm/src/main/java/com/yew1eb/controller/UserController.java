@@ -1,8 +1,9 @@
 package com.yew1eb.controller;
 
-import com.shiyanlou.photo.domain.User;
-import com.shiyanlou.photo.service.ImageService;
-import com.shiyanlou.photo.service.UserService;
+import com.yew1eb.domain.User;
+import com.yew1eb.service.ImageService;
+import com.yew1eb.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,8 @@ import java.io.PrintWriter;
 public class UserController {
     private static final long serialVersionUID = 1L;
 
+    @Autowired
+    private UserService userService;
 
     @RequestMapping("/login")
     public Object login(Model model, @RequestParam String username, @RequestParam String password) {
@@ -31,7 +34,7 @@ public class UserController {
             result = "1";
         } else if (password.isEmpty()) {
             result = "2";
-        } else if ((user = userService.getUserByUsername(username)) == null) {
+        } else if ((user = (User) userService.findByName(username)) == null) {
             result = "3";
         } else {
             if (!user.getPassword().equals(password)) {

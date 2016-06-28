@@ -1,45 +1,44 @@
 package com.java1234.controller.web.api;
 
+import com.java1234.common.Log4jConfigurator;
 import com.java1234.entity.Blog;
-import com.java1234.lucene.BlogIndex;
-import com.java1234.service.BlogService;
 import com.java1234.util.ResponseUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.Log4jConfigListener;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
+/**
+ * @author zhouhai
+ * @createTime 16/6/23
+ * @description
+ */
+
 @RestController
-@RequestMapping("/lucene")
-public class LuceneAddIndexApi {
+@RequestMapping("/log")
+public class LogChangerApi {
 
-    @Autowired
-    private BlogService blogService;
+    private Log4jConfigurator log4jConfigurator = new Log4jConfigurator();
 
-    private BlogIndex blogIndex = new BlogIndex();
 
     @RequestMapping("")
     @ResponseBody
     public String index() {
-        return "welcome to lucene";
+        return "welcome to LogChanger.";
     }
 
     @RequestMapping(value = "/rebuild", method = RequestMethod.GET)
     @ResponseBody
     public String rebuild(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        List<Blog> blogs = blogService.getAll();
-        System.out.println(blogs.size());
-        for (Blog blog : blogs) {
-            blogIndex.addIndex(blog); // 添加博客索引
-        }
-        ResponseUtil.write(response, blogs);
-        return "finished!";
-    }
 
+        List<String> loggers = log4jConfigurator.getLoggers();
+
+        return loggers.toString();
+    }
 }

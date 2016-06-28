@@ -1,1 +1,0 @@
-spring boot  中静态资源加载顺序: META/resources > resources > static > public 

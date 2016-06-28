@@ -30,7 +30,7 @@ public abstract class AbstractBaseDao<T,PK extends Serializable> implements Base
 	}
 	@Override
 	public T findById(PK pk) {
-		return idao.findById(entityClass, pk);
+		return (T) idao.findById(entityClass, pk);
 	}
 	
 	@Override
@@ -47,7 +47,7 @@ public abstract class AbstractBaseDao<T,PK extends Serializable> implements Base
 	}
 	
 	public T findByParam(Map<String, Object> maps,String operate) {
-		return idao.findByParam(entityClass, maps, operate);
+		return (T) idao.findByParam(entityClass, maps, operate);
 	}
 	
 	public int isExist(Map<String, Object> maps,String operate){

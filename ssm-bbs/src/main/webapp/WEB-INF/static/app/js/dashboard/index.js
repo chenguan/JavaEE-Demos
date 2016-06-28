@@ -1,3 +1,0 @@
-$(function(){
-    $('#dashboard').addClass('active');
-})

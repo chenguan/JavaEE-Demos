@@ -12,7 +12,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.util.UrlPathHelper;
 
 /**
@@ -21,7 +22,7 @@ import org.springframework.web.util.UrlPathHelper;
  *
  */
 public class RequestUtils {
-	private static final Logger log = Logger.getLogger(RequestUtils.class);
+	private static final Logger log = LoggerFactory.getLogger(RequestUtils.class);
 	/**
 	 * 获取QueryString的参数，并使用URLDecoder以UTF-8格式转码。如果请求是以post方法提交的，
 	 * 那么将通过HttpServletRequest#getParameter获取。

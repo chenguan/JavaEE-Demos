@@ -4,6 +4,7 @@ JavaEE开源demo学习（servlet, spring, springmvc, mybatis, mysql, druid, free
 
     ├── FHMYSQL
     ├── _docs
+    ├── autoCode 自动生成代码
     ├── dubbo-enterprise-parent
     ├── dubbo-zookeeper-p2p
     ├── expper

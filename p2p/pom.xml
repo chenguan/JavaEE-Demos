@@ -6,6 +6,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>p2p Maven Webapp</name>
 	<url>http://maven.apache.org</url>
+	<packaging>war</packaging>
 
 	<properties>
 		<spring.version>4.2.4.RELEASE</spring.version>
@@ -205,33 +206,4 @@
 			</plugin>
 		</plugins>
 	</build>
-	<packaging>war</packaging>
-
-
-	<repositories>
-		<repository>
-			<id>harme-maven-public</id>
-			<name>maven-public</name>
-			<url>http://localhost:8099/repository/maven-public/</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-		</repository>
-	</repositories>
-	<pluginRepositories>
-		<pluginRepository>
-			<id>harme-maven-public</id>
-			<name>maven-public</name>
-			<url>http://localhost:8099/repository/maven-public/</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</pluginRepository>
-	</pluginRepositories>
 </project>

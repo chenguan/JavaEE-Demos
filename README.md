@@ -18,7 +18,6 @@ JavaEE开源demo学习（servlet, spring, springmvc, mybatis, mysql, druid, free
     ├── spring-embedded-database : spring中实践嵌入型数据库
     ├── springabc : Spring + Spring Data + Hibernate + Ehcache
     ├── ssm : Spring + Mybatis + SpringMVC + Freemarker 架子项目
-    ├── ssm-cms : Spring + Mybatis + SpringMVC + Freemarker
     ├── ssm_blog : Spring + Mybatis + SpringMVC, shiro, lucene
     ├── stackinfo : Spring Boot + Mybatis
     ├── tiny-crm : 客户关系管理系统 Spring, SpringMVC, Mybatis, SBAdmin, jQuery, Apache commons, Google Guava, MySQL 

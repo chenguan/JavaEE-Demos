@@ -16,7 +16,6 @@ JavaEE开源demo学习（servlet, spring, springmvc, mybatis, mysql, druid, free
     ├── servlet-demos : servlet实现web
     ├── sfans-web : CMS和Blog系统  Java8, Spring Boot, Spring security, Spring data-jpa, Semantic-UI, angularjs, thymeleaf
     ├── spring-embedded-database : spring中实践嵌入型数据库
-    ├── springabc : Spring + Spring Data + Hibernate + Ehcache
     ├── ssm : Spring + Mybatis + SpringMVC + Freemarker 架子项目
     ├── ssm_blog : Spring + Mybatis + SpringMVC, shiro, lucene
     ├── stackinfo : Spring Boot + Mybatis

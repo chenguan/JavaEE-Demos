@@ -4,13 +4,12 @@ JavaEE开源demo学习（servlet, spring, springmvc, mybatis, mysql, druid, free
 
     ├── _docs  学习笔记
     ├── cl-privilege  通用权限管理系统 dubbo redis spring
-    ├── expper 社区论坛， Spring-Boot, PostgreSQL, Jhipster, Redis, RabbitMQ, ElasticSearch, Node.js
     ├── funiture : 管理系统， spring, mybatis, hibernate, RabbitMQ, zookeeper, druid
     ├── goshop : 分布式、高可用、多店铺电商系统, ：spring 、springmvc、mybatis、maven、html5、jquery、freemarker、Redis（缓存服务器）、Solr（搜索引擎）、Dubbo（调用系统服务）、Nginx（web服务器）、FastDFS（文件服务器）、Shiro（权限框架）、Zookeeper（分布式应用程序协调服务）
     ├── jeesite : JeeSite 企业信息化快速开发平台, http://jeesite.com/
     ├── osframe : springmvc+spring+hibernate, angular js+sea js +bootstrap
     ├── p2p : JDK7+tomcat 7+MySQL 5.5+Redis+SpringMVC+beetl+fastjson
-    ├── sblog 博客 : Spring ＋ SpringMVC ＋ Velocity ＋ MyBatis 
+    ├── superx 博客 : Spring ＋ SpringMVC ＋ freemarker ＋ MyBatis 
     ├── servlet-demos : servlet实现web
     ├── sfans-web : CMS和Blog系统  Java8, Spring Boot, Spring security, Spring data-jpa, Semantic-UI, angularjs, thymeleaf
     ├── spring-embedded-database : spring中实践嵌入型数据库

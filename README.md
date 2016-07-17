@@ -3,7 +3,6 @@ JavaEE开源demo学习（servlet, spring, springmvc, mybatis, mysql, druid, free
 ## 目录
 
     ├── _docs  学习笔记
-    ├── bms-project  可二次开发的管理系统，spring， hibernate， mybatis， freemarker， ehcache
     ├── cl-privilege  通用权限管理系统 dubbo redis spring
     ├── expper 社区论坛， Spring-Boot, PostgreSQL, Jhipster, Redis, RabbitMQ, ElasticSearch, Node.js
     ├── funiture : 管理系统， spring, mybatis, hibernate, RabbitMQ, zookeeper, druid

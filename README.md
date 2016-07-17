@@ -9,7 +9,6 @@ JavaEE开源demo学习（servlet, spring, springmvc, mybatis, mysql, druid, free
     ├── funiture : 管理系统， spring, mybatis, hibernate, RabbitMQ, zookeeper, druid
     ├── goshop : 分布式、高可用、多店铺电商系统, ：spring 、springmvc、mybatis、maven、html5、jquery、freemarker、Redis（缓存服务器）、Solr（搜索引擎）、Dubbo（调用系统服务）、Nginx（web服务器）、FastDFS（文件服务器）、Shiro（权限框架）、Zookeeper（分布式应用程序协调服务）
     ├── jeesite : JeeSite 企业信息化快速开发平台, http://jeesite.com/
-    ├── lemon : 开源OA系统， http://www.mossle.com
     ├── osframe : springmvc+spring+hibernate, angular js+sea js +bootstrap
     ├── p2p : JDK7+tomcat 7+MySQL 5.5+Redis+SpringMVC+beetl+fastjson
     ├── sblog 博客 : Spring ＋ SpringMVC ＋ Velocity ＋ MyBatis 

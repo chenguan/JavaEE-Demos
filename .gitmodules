@@ -1,9 +1,6 @@
 [submodule "goshop"]
 	path = goshop
 	url = git@github.com:yew1eb/goshop.git
-[submodule "expper"]
-    path = expper
-    url = git@github.com:yew1eb/expper.git
 [submodule "jeesite"]
     path = jeesite
     url = git@github.com:yew1eb/jeesite.git

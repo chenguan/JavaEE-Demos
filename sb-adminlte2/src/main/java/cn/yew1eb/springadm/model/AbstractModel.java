@@ -1,4 +1,4 @@
-package br.com.brunobrasilweb.springadm.model;
+package cn.yew1eb.springadm.model;
 
 
 import javax.persistence.*;

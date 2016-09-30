@@ -1,7 +1,7 @@
-package br.com.brunobrasilweb.springadm.controller;
+package cn.yew1eb.springadm.controller;
 
-import br.com.brunobrasilweb.springadm.model.Customers;
-import br.com.brunobrasilweb.springadm.service.CustomersService;
+import cn.yew1eb.springadm.model.Customers;
+import cn.yew1eb.springadm.service.CustomersService;
 import com.fasterxml.jackson.databind.deser.DataFormatReaders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import java.text.DateFormat;
-import java.util.Calendar;
 
 @Controller
 public class CustomerController {

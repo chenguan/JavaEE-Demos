@@ -1,4 +1,4 @@
-package br.com.brunobrasilweb.springadm;
+package cn.yew1eb.springadm;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;

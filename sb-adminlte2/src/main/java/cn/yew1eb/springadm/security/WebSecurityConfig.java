@@ -1,4 +1,4 @@
-package br.com.brunobrasilweb.springadm.security;
+package cn.yew1eb.springadm.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;

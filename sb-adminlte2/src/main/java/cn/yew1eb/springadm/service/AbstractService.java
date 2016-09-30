@@ -1,7 +1,7 @@
-package br.com.brunobrasilweb.springadm.service;
+package cn.yew1eb.springadm.service;
 
 
-import br.com.brunobrasilweb.springadm.model.AbstractModel;
+import cn.yew1eb.springadm.model.AbstractModel;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -10,7 +10,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.io.Serializable;
-import java.util.List;
 
 public abstract class AbstractService<T extends AbstractModel<Long>, Long extends Serializable> {
 
